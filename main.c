@@ -20,9 +20,9 @@ typedef			struct s_coord
 	// int		name_x;
 	// int		name_y;
 
-	float	x;
-	float	y;
-	float	z;
+	int	x;
+	int	y;
+	int	z;
 }				t_coord;
 
 int			color(unsigned char red, unsigned char green, unsigned char blue)
@@ -34,78 +34,69 @@ int			color(unsigned char red, unsigned char green, unsigned char blue)
 	return (color);
 }
 
-int			deal_key(int key, void *param)
+void		error(char *message)
 {
-	write (1, &"X", 1);
-	return (0);
+	ft_putstr("error: ");
+	ft_putendl(message);
+	exit(0);
 }
 
-char			***create_array(char *file)
+void		line(void *mlx_ptr, void *win_ptr, int x0, int y0, int x1, int y1)
 {
-	int		fd;
+	// ft_putstr("I'm in!\n");
+	/* y = kx + b */
+	float	k;
+	float	b;
 
-	char	*line;
-	char	**parsed_line;
-	char	***res;
+	if (x1 - x0 != 0)
+		k = (float)(y1 - y0) / (float)(x1 - x0);
+	else
+		k = 0;
+	b = y0 - k * x0;
 
-	int		i;
-	int		count;
-	int		points;
-	int		lines;
+	// printf("y = %fx + %f\n", k, b);
 
-	fd = open(file, O_RDONLY);
-	lines = 0;
-	while (get_next_line(fd, &line))
-		lines++;
-	res = ft_memalloc(sizeof(char**) * (lines + 1));
-	res[lines] = 0;
-	close(fd);
-	fd = open(file, O_RDONLY);
-	points = -1;
-	lines = 0;
-	while (get_next_line(fd, &line))
+	if (x0 == x1)
+		while (y0++ < y1)
+			mlx_pixel_put(mlx_ptr, win_ptr, x0, y0, color(255, 0, 0));
+	if (y0 == y1)
+		while (x0++ < x1)
+			mlx_pixel_put(mlx_ptr, win_ptr, x0, y0, color(255, 0, 0));
+
+	int		y = y0;
+	int		y_prev;
+	while (x0++ < x1)
 	{
-		i = -1;
-		while (line[++i])
-			if (line[i] == '\t')
-				line[i] = ' ';
-		parsed_line = ft_strsplit(line, ' ');
-		i = -1;
-		count = 0;
-		while (parsed_line[++i])
-			count++;
-		if (count != points && points != -1)
+		y_prev = y;
+		y = k * x0 + b;
+		mlx_pixel_put(mlx_ptr, win_ptr, x0, y, color(255, 0, 0));
+		// printf("(%d,%d)\n", x0, (int)(k * x0 + b));
+		while (y - y_prev++ > 1)
 		{
-			ft_putstr("error: invalid map\n");
-			return (0);
+			mlx_pixel_put(mlx_ptr, win_ptr, x0, y_prev, color(255, 0, 0));
+			// printf("dop: (%d,%d)\n", x0, y_prev);
 		}
-		else
-			points = count;
-		res[lines++] = parsed_line;
-
 	}
-	close(fd);
-	return (res);
 }
 
-void		print_dots(t_coord **coord, int x, int y, int win_x, int win_y)
+void		print_dots(void *mlx_ptr, void *win_ptr, t_coord **coord, int x, int y, int win_x, int win_y)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
 	int		i;
 	int		j;
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, win_x, win_y, "mlx!!!");
 	i = -1;
 	while (++i < x)
 	{
 		j = -1;
 		while (++j < y)
-			mlx_pixel_put(mlx_ptr, win_ptr, coord[i][j].x, coord[i][j].y, color(100, 100, 0));
+		{
+			if (j < y - 1)
+				line(mlx_ptr, win_ptr, coord[i][j].x, coord[i][j].y, coord[i][j + 1].x, coord[i][j + 1].y);
+			if (i < x - 1)
+				line(mlx_ptr, win_ptr, coord[i][j].x, coord[i][j].y, coord[i + 1][j].x, coord[i + 1][j].y);
+			mlx_pixel_put(mlx_ptr, win_ptr, coord[i][j].x, coord[i][j].y, color(255, 0, 0));
+		}
 	}
-	// mlx_key_hook(win_ptr, deal_key, (void *)0);
-	mlx_loop(mlx_ptr);
 }
 
 int			get_x(char *file)
@@ -122,6 +113,21 @@ int			get_x(char *file)
 	return (lines);
 }
 
+int			get_parsed_line(int fd, char ***parsed_line)
+{
+	char	*line;
+	int		i;
+
+	if (!get_next_line(fd, &line))
+		return (0);
+	i = -1;
+	while (line[++i])
+		if (line[i] == '\t')
+			line[i] = ' ';
+	*parsed_line = ft_strsplit(line, ' ');
+	return (1);
+}
+
 int			get_y(char *file)
 {
 	int		fd;
@@ -129,34 +135,78 @@ int			get_y(char *file)
 	char	**parsed_line;
 	int		i;
 	int		elems;
+	int		st_elems;
 
 	fd = open(file, O_RDONLY);
-	get_next_line(fd, &line);
-	i = -1;
-	while (line[++i])
-		if (line[i] == '\t')
-			line[i] = ' ';
-	parsed_line = ft_strsplit(line, ' ');
-	elems = 0;
-	i = -1;
-	while (parsed_line[++i])
-		elems++;
+	elems = -1;
+	while (get_parsed_line(fd, &parsed_line))
+	{
+		i = -1;
+		st_elems = elems;
+		elems = 0;
+		while (parsed_line[++i])
+			elems++;
+		if (elems != st_elems && st_elems != -1)
+			error("invalid map");
+	}
 	return (elems);
 }
 
-void		base_points(t_coord **p, int x, int y, int win_x, int win_y)
+void		base_points(char *file, t_coord **p, int x, int y, int win_x, int win_y)
 {
 	int		i;
 	int		j;
 	t_coord	base;
+	int		fd;
+	char	**parsed_line;
 
 	float		delta;
 
+	fd = open(file, O_RDONLY);
 	delta = (2 * win_x / 3) / (y - 1);
-	// delta = 10;
+	int start_x = (win_x - (y - 1) * delta) / 2; // ?
+	int start_y = (win_y - (x - 1) * delta) / 2; // ?
 
-	int start_x = win_x / 6;
-	int start_y = win_y / 6;
+	i = -1;
+	while (++i < x)
+	{
+		j = -1;
+		// get_next_line(fd, &line);
+		get_parsed_line(fd, &parsed_line);
+		while (++j < y)
+		{
+			base.x = start_y + delta * j;
+			base.y = start_x + delta * i;
+			base.z = ft_atoi(parsed_line[j]);
+
+			// base.y -= base.z * 5; // !!!
+
+			p[i][j] = base;
+		}
+	}
+}
+
+
+
+int		key_hook(int key, void *param)
+{
+	param = 0;
+	if (key == ESC)
+		exit(1);
+	// else if (key == UP)
+	// 	translate()
+	return (0);
+}
+
+int exit_x(void)
+{
+	exit(1);
+}
+
+void		rotate(t_coord **coord, int x, int y, int direction, double angle)
+{
+	int		i;
+	int		j;
 
 	i = -1;
 	while (++i < x)
@@ -164,38 +214,65 @@ void		base_points(t_coord **p, int x, int y, int win_x, int win_y)
 		j = -1;
 		while (++j < y)
 		{
-			base.x = start_y + delta * j;
-			base.y = start_x + delta * i;
-			p[i][j] = base;
+			if (direction == X)
+			{
+				coord[i][j].y = coord[i][j].y * cos(angle) - coord[i][j].z * sin(angle);
+				coord[i][j].z = coord[i][j].y * sin(angle) + coord[i][j].z * cos(angle);
+			}
+			if (direction == Y)
+			{
+				coord[i][j].x = coord[i][j].x * cos(angle) - coord[i][j].y * sin(angle);
+				coord[i][j].y = coord[i][j].x * sin(angle) + coord[i][j].y * cos(angle);
+			}
+			if (direction == Z)
+			{
+				coord[i][j].z = coord[i][j].z * cos(angle) - coord[i][j].x * sin(angle);
+				coord[i][j].x = coord[i][j].z * sin(angle) + coord[i][j].x * cos(angle);
+				// coord[i][j].x += 600;
+			}
+			// coord[i][j].x += 500;
+			// coord[i][j].y += 500;
+			// coord[i][j].y -= 900;
+			// printf("(%d,%d) x: %d y: %d z: %d\n", i, j, coord[i][j].x, coord[i][j].y, coord[i][j].z);
 		}
 	}
 }
 
-void		line(void *mlx_ptr, void *win_ptr, int x0, int y0, int x1, int y1)
+void		convert(t_coord **coord, int x, int y)
 {
-	int		dx = abs(x0 - x1);
-	int		dy = abs(y0 - y1);
+	int		i;
+	int		j;
+	int		d = 10;
 
-	float	error = 0;
-	float	dError = dy;
-
-	int		x = x0;
-	int		y = y0;
-	int		diry = y1 - y0;
-
-	if (dy > 0)
-		diry = 1;
-	if (dy < 0)
-		diry = -1;
-	while (x++ < x1)
+	i = -1;
+	while (++i < x)
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, x, y, color(100, 100, 0));
-		error = error + dError;
-		if (2 * error >= dx)
-			y = y + diry;
-		error = error - dy;
+		j = -1;
+		while (++j < y)
+		{
+			coord[i][j].x = coord[i][j].x * d / (coord[i][j].z + d);
+			coord[i][j].y = coord[i][j].y * d / (coord[i][j].z + d);
+			printf("(%d,%d) x: %d y: %d z: %d\n", i, j, coord[i][j].x, coord[i][j].y, coord[i][j].z);
+		}
 	}
+}
 
+void		translate(t_coord **coord, int x, int y, int tr_x, int tr_y)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < x)
+	{
+		j = -1;
+		while (++j < y)
+		{
+			coord[i][j].x += tr_x;
+			coord[i][j].y += tr_y;
+			// printf("(%d,%d) x: %d y: %d z: %d\n", i, j, coord[i][j].x, coord[i][j].y, coord[i][j].z);
+		}
+	}
 }
 
 int			main(int args, char **argv)
@@ -205,40 +282,60 @@ int			main(int args, char **argv)
 	int		x;
 	int		y;
 
-	int		win_x = 700;
-	int		win_y = 500;
+	int		win_x = 2500;
+	int		win_y = 1300;
 
 	t_coord **coord;
 
 	if (args == 1)
+		error("without a file");
+	x = get_x(argv[1]);
+	coord = (t_coord**)ft_memalloc(sizeof(t_coord*) * x);
+	y = get_y(argv[1]);
+	i = -1;
+	while (++i < x)
+		coord[i] = (t_coord*)ft_memalloc(sizeof(t_coord) * y);
+	base_points(argv[1], coord, x, y, win_x, win_y);
+
+	i = -1;
+	while (++i < x)
 	{
-		ft_putstr("error: without a file\n");
-		return (0);
+		j = -1;
+		while (++j < y)
+		{
+			// coord[i][j].y -= coord[i][j].z * 5;
+			printf("(%d,%d) x: %d y: %d z: %d\n", i, j, coord[i][j].x, coord[i][j].y, coord[i][j].z);
+		}
 	}
 
-	// x = get_x(argv[1]);
-	// coord = (t_coord**)ft_memalloc(sizeof(t_coord*) * x);
-	// y = get_y(argv[1]);
-	// i = -1;
-	// while (++i < x)
-	// 	coord[i] = (t_coord*)ft_memalloc(sizeof(t_coord) * y);
-	// base_points(coord, x, y, win_x, win_y);
-	// i = -1;
-	// while (++i < x)
-	// {
-	// 	j = -1;
-	// 	while (++j < y)
-	// 		printf("(%d,%d) x: %f y: %f z: %f\n", i, j, coord[i][j].x, coord[i][j].y, coord[i][j].z);
-	// }
-	// print_dots(coord, x, y, win_x, win_y);
+	
 
 	void	*mlx_ptr = mlx_init();
-	void	*win_ptr = mlx_new_window(mlx_ptr, win_x, win_y, "mlx!!!");
+	void	*win_ptr = mlx_new_window(mlx_ptr, win_x, win_y, "FdF");
 
-	mlx_pixel_put(mlx_ptr, win_ptr, 10, 10, color(250, 0, 0));
-	mlx_pixel_put(mlx_ptr, win_ptr, 200, 300, color(250, 0, 0));
-	line(mlx_ptr, win_ptr, 10, 10, 200, 300);
+	// coord[8][16].x = 200;
+	// coord[8][16].y = 200;
+	
+	// rotate(coord, x, y, Y, 0.2);
+	convert(coord, x, y);
+	translate(coord, x, y, 100, 100);
 
+	print_dots(mlx_ptr, win_ptr, coord, x, y, win_x, win_y);
+	// printf("(%d %d %d)\n", coord[8][16].x, coord[8][16].y, coord[8][16].z);
+	
+	// printf("(%d %d %d)\n", coord[8][16].x, coord[8][16].y, coord[8][16].z);
+
+	
+
+
+	ft_putstr("FUCK!\n");
+
+	// mlx_pixel_put(mlx_ptr, win_ptr, 1, 1, color(250, 0, 0));
+	// mlx_pixel_put(mlx_ptr, win_ptr, 100, 34, color(250, 0, 0));
+	// line(mlx_ptr, win_ptr, 200, 200, 300, 300);
+	mlx_hook(win_ptr, 2, 0, &key_hook, 0);
+	mlx_hook(win_ptr, 17, 0, exit_x, 0);
+	// mlx_key_hook(win_ptr, &key_hook, 0);
 	mlx_loop(mlx_ptr);
 	
 
