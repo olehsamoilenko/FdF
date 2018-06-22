@@ -26,8 +26,14 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
+# define W 13
+# define A 0 // ???????????
+# define S 1
+# define D 2 // ?????????
 # define PLUS 24
 # define MINUS 27
+# define HEIGHT 800
+# define WIDTH 1500
 
 typedef struct	s_vector
 {
@@ -41,11 +47,15 @@ typedef struct	s_view
 	void		*mlx_ptr;
 	void		*win_ptr;
 	
-	t_vector	**coord;
+	t_vector	**base;
 	int			rows;
 	int			columns;
 
+	int			angleX;
+	int			angleY;
+	int			angleZ;
 	float		zoom;
+	float		height;
 	
 }				t_view;
 
