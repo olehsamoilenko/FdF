@@ -51,11 +51,11 @@ typedef struct	s_view
 	int			rows;
 	int			columns;
 
-	int			angleX;
-	int			angleY;
-	int			angleZ;
-	float		zoom;
-	float		height;
+	int					angleX;
+	int					angleY;
+	int					angleZ;
+	int		zoom;
+	float				height;
 	
 }				t_view;
 

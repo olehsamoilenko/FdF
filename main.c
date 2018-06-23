@@ -130,9 +130,10 @@ t_view		view_init(char *file)
 	read_coord(file, view.base, view.rows, view.columns);
 	view.mlx_ptr = mlx_init();
 	view.win_ptr = mlx_new_window(view.mlx_ptr, WIDTH, HEIGHT, "FdF");
-	view.angleX = 40;
-	view.angleY = -40;
-	view.angleZ = -30;
+	view.angleX = 0; //45
+	view.angleY = 0; //-45
+	view.angleZ = 0; //-30
+	// view.angleZ = 0;
 	view.zoom = 30;
 	view.height = -0.2;
 	return (view);
@@ -198,11 +199,13 @@ void		line(t_view *view, int x0, int y0, int x1, int y1, int color)
 
 
 
-void		zoom(t_view *view, t_vector **coord, float zoom)
+void		zoom(t_view *view, t_vector **coord, int zoom)
 {
 	int		i;
 	int		j;
 
+	if (zoom < 0)
+		zoom = 0;
 	i = -1;
 	while (++i < view->rows)
 	{
@@ -246,17 +249,17 @@ void		rotate(t_view *view, t_vector **coord, int direction, float angle)
 			if (direction == X_AXIS)
 			{
 				coord[i][j].y = coord[i][j].y * cos(angle) + coord[i][j].z * sin(angle);
-				coord[i][j].z = coord[i][j].z * cos(angle) - coord[i][j].y * sin(angle);
+				coord[i][j].z = coord[i][j].y * sin(angle) + coord[i][j].z * cos(angle);
 			}
 			if (direction == Y_AXIS)
 			{
-				coord[i][j].x = coord[i][j].x * cos(angle) - coord[i][j].z * sin(angle);
-				coord[i][j].z = coord[i][j].z * cos(angle) + coord[i][j].x * sin(angle);
+				coord[i][j].x = coord[i][j].x * cos(angle) + coord[i][j].z * sin(angle);
+				coord[i][j].z = coord[i][j].x * sin(angle) + coord[i][j].z * cos(angle);
 			}
 			if (direction == Z_AXIS)
 			{
 				coord[i][j].x = coord[i][j].x * cos(angle) + coord[i][j].y * sin(angle);
-				coord[i][j].y = coord[i][j].y * cos(angle) - coord[i][j].x * sin(angle);
+				coord[i][j].y = coord[i][j].x * sin(angle) - coord[i][j].y * cos(angle);
 			}
 		}
 	}
@@ -291,16 +294,15 @@ void		print_lines(t_view *view)
 
 	new_coord = copy(view);
 
-	// printf("base: (%f, %f)\n", view->base[3][3].x, view->base[3][3].y);
-	// printf("new: (%f, %f)\n", new_coord[3][3].x, new_coord[3][3].y);
+
 	heigth(view, new_coord, view->height);
-	rotate(view, new_coord, X_AXIS, view->angleX);
+
 	rotate(view, new_coord, Y_AXIS, view->angleY);
+	rotate(view, new_coord, X_AXIS, view->angleX);
 	rotate(view, new_coord, Z_AXIS, view->angleZ);
+	
 	zoom(view, new_coord, view->zoom);
 
-	// printf("base: (%f, %f)\n", view->base[3][3].x, view->base[3][3].y);
-	// printf("new: (%f, %f)\n", new_coord[3][3].x, new_coord[3][3].y);
 
 	i = -1;
 	while (++i < view->rows)
@@ -348,21 +350,23 @@ int		key_hook(int key, void *v)
 	if (key == ESC)
 		exit(1);
 	else if (key == LEFT)
-		view->angleY += 5;
+		view->angleY += 10;
 	else if (key == RIGHT)
-		view->angleY -= 5;
+		view->angleY -= 10;
 	else if (key == UP)
-		view->angleX -= 5;
+		view->angleX -= 10;
 	else if (key == DOWN)
-		view->angleX += 5;
+		view->angleX += 10;
 	else if (key == PLUS)
 		view->zoom += 1;
 	else if (key == MINUS)
 		view->zoom -= 1;
 	else if (key == W)
-		view->height -= 0.1;
+		view->angleZ += 10;
+		// view->height -= 0.1;
 	else if (key == S)
-		view->height += 0.1;
+		view->angleZ -= 10;
+		// view->height += 0.1;
 	
 	
 	
@@ -391,6 +395,11 @@ int		key_hook(int key, void *v)
 	// print_dots(mlx_ptr, win_ptr, coord, x, y);
 	return (0);
 }
+
+// t_vector	matrix_mult()
+// {
+
+// }
 
 int			main(int args, char **argv)
 {
