@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 static intmax_t	cast_int(t_pattern tmp, va_list argptr)
 {

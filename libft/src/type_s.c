@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 static int		print_s(t_spaces spaces, t_pattern tmp, int num, int *str)
 {

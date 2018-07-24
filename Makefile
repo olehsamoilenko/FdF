@@ -1,28 +1,35 @@
 NAME = fdf
 
-HEADER = fdf.h
+HEADER = -I ./includes -I ./libft/includes 
 
 FLAGS = -Wall -Werror -Wextra
+LIBFLAGS = libft/libft.a -lmlx -framework OpenGL -framework AppKit
 
-SRC =	main.c
+LIST =	main \
+		line \
+		key_hook \
+		print_lines
 
-OBJ = $(SRC:.c=.o)
+SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))
+OBJ = $(addprefix obj/, $(addsuffix .o, $(LIST)))
 
-%.o: %.c $(HEADER)
-	gcc -c $< -o $@
+obj/%.o: src/%.c
+	#FLAGS
+	@gcc -c $< -o $@ $(HEADER)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libft
-	gcc $(SRC) -o $(NAME) -I /usr/local/include -L /usr/local/lib libft/libft.a -lmlx -framework OpenGL -framework AppKit
+	@make -C libft
+	#FLAGS
+	@gcc $(SRC) -o $(NAME) $(HEADER) $(LIBFLAGS)
 
 clean:
-	make -C libft clean
+	@make -C libft clean
 	@rm -f $(OBJ)
 
 fclean: clean
-	make -C libft fclean
+	@make -C libft fclean
 	@rm -f $(NAME)
 
 re: fclean all
