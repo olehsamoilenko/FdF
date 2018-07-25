@@ -18,6 +18,11 @@
 
 # include <fcntl.h>
 # include <math.h>
+# include <stdio.h> // trash
+
+# define X_AXIS 0
+# define Y_AXIS 1
+# define Z_AXIS 2
 
 # define ESC 53
 # define UP 126
@@ -42,6 +47,15 @@ typedef struct	s_vector
 	float	z;
 }				t_vector;
 
+// typedef struct	s_params
+// {
+// 	int			angleX;
+// 	int			angleY;
+// 	int			angleZ;
+// 	int			zoom;
+// 	float		height;
+// }				t_params;
+
 typedef struct	s_view
 {
 	void		*mlx_ptr;
@@ -59,15 +73,18 @@ typedef struct	s_view
 	
 }				t_view;
 
-void		line(t_view *view, int x0, int y0, int x1, int y1, int color);
+void		line(t_view *view, int x0, int y0, int x1, int y1, int c);
 int			key_hook(int key, void *v);
 void		print_lines(t_view *view);
 
 t_vector	**copy(t_view *view); // ?
 void		rotate_all(t_view *view, t_vector **coord);
 void		zoom(t_view *view, t_vector **coord, int zoom);
-void		heigth(t_view *view, t_vector **coord, float height);
-int			color(unsigned char red, unsigned char green, unsigned char blue);
+void		heigth(t_view *view, t_vector **coord);
+int			get_color(unsigned char red, unsigned char green, unsigned char blue);
+
+// void		rotate_all(t_view *view, t_vector **coord);
+void		rotate(t_view *view, t_vector **coord, int axis, int angle);
 
 
 #endif

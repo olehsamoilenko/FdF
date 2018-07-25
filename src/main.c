@@ -16,7 +16,7 @@
 #define MIN_GREEN 256
 #define MIN_RED 65536
 
-int			color(unsigned char red, unsigned char green, unsigned char blue)
+int			get_color(unsigned char red, unsigned char green, unsigned char blue)
 {
 	int		color;
 
@@ -163,7 +163,7 @@ void		zoom(t_view *view, t_vector **coord, int zoom)
 	}
 }
 
-void		heigth(t_view *view, t_vector **coord, float height)
+void		heigth(t_view *view, t_vector **coord)
 {
 	int		i;
 	int		j;
@@ -174,54 +174,12 @@ void		heigth(t_view *view, t_vector **coord, float height)
 		j = -1;
 		while (++j < view->columns)
 		{
-			coord[i][j].z = view->base[i][j].z * height;
+			coord[i][j].z = view->base[i][j].z * view->height;
 		}
 	}
 }
 
-void		matrix_init(t_view *view, double rot_all[3][3])
-{
-	double x = view->angleX * M_PI / 180;
-	double y = view->angleY * M_PI / 180;
-	double z = view->angleZ * M_PI / 180;
 
-	rot_all[0][0] = cos(y) * cos(z);
-	rot_all[1][0] = sin(x) * sin(y) * cos(z) + cos(x) * sin(z);
-	rot_all[2][0] = sin(x) * sin(z) - cos(x) * sin(y) * cos(z);
-	rot_all[0][1] = -cos(y) * sin(z);
-	rot_all[1][1] = cos(x) * cos(z) - sin(x) * sin(y) * sin(z);
-	rot_all[2][1] = cos(x) * sin(y) * sin(z) + sin(x) * cos(z);
-	rot_all[0][2] = sin(y);
-	rot_all[1][2] = -sin(x) * cos(y);
-	rot_all[2][2] = cos(x) * cos(y);
-}
-
-void		rotate_all(t_view *view, t_vector **coord)
-{
-	int		x;
-	int		y;
-	double	tmp[3];
-	double	rot_all[3][3];
-
-	matrix_init(view, rot_all);
-	y = -1;
-	while (++y < view->rows)
-	{
-		x = -1;
-		while (++x < view->columns)
-		{
-			tmp[0] = rot_all[0][0] * view->base[y][x].x + rot_all[0][1] *
-						view->base[y][x].y + rot_all[0][2] * view->base[y][x].z;
-			tmp[1] = rot_all[1][0] * view->base[y][x].x + rot_all[1][1] *
-						view->base[y][x].y + rot_all[1][2] * view->base[y][x].z;
-			tmp[2] = rot_all[2][0] * view->base[y][x].x + rot_all[2][1] *
-						view->base[y][x].y + rot_all[2][2] * view->base[y][x].z;
-			coord[y][x].x = tmp[0];
-			coord[y][x].y = tmp[1];
-			coord[y][x].z = tmp[2];
-		}
-	}
-}
 
 t_vector	**copy(t_view *view) // ?
 {

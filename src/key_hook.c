@@ -32,9 +32,15 @@ int		key_hook(int key, void *v)
 	else if (key == MINUS)
 		view->zoom -= 1;
 	else if (key == W)
+	{
 		view->height -= 0.1;
+		// printf("W\n");
+	}
 	else if (key == S)
+	{
 		view->height += 0.1;
+		// printf("S\n");
+	}
 	else if (key == ONE)
 		view->angleZ += 10;
 	else if (key == TWO)

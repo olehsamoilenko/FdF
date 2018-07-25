@@ -8,21 +8,22 @@ LIBFLAGS = libft/libft.a -lmlx -framework OpenGL -framework AppKit
 LIST =	main \
 		line \
 		key_hook \
-		print_lines
+		print_lines \
+		rotate
 
 SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))
 OBJ = $(addprefix obj/, $(addsuffix .o, $(LIST)))
 
 obj/%.o: src/%.c
-	#FLAGS
+	#FLAGS2
 	@gcc -c $< -o $@ $(HEADER)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	#FLAGS
-	@gcc $(SRC) -o $(NAME) $(HEADER) $(LIBFLAGS)
+	#FLAGS1
+	@gcc $(OBJ) -o $(NAME) $(HEADER) $(LIBFLAGS)
 
 clean:
 	@make -C libft clean
