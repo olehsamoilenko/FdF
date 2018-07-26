@@ -27,7 +27,7 @@ int			get_color(unsigned char red, unsigned char green, unsigned char blue)
 
 void		error(char *message)
 {
-	ft_putstr("error: ");
+	// ft_putstr("error: ");
 	ft_putendl(message);
 	exit(0);
 }
@@ -41,13 +41,6 @@ int			exit_func(void)
 	// delete_coord(view, view->base);
 	exit(1);
 }
-
-
-
-
-
-
-
 
 // void		zoom(t_view *view, t_vector **coord)
 // {
@@ -84,12 +77,6 @@ int			exit_func(void)
 // 	}
 // }
 
-
-
-
-
-
-
 // void		translate(t_view *view, t_vector **coord)
 // {
 // 	int		i;
@@ -112,8 +99,8 @@ int			exit_func(void)
 
 int			main(int args, char **argv)
 {
-	if (args == 1)
-		error("without a file");
+	if (args != 2)
+		error("usage: ./fdf [filename]");
 	
 
 	t_view	view = init(argv[1]);

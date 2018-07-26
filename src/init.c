@@ -36,7 +36,7 @@ int			get_x(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		error("invalid file name");
+		error("error: invalid file name");
 	lines = 0;
 	while (get_next_line(fd, &line))
 	{
@@ -66,7 +66,7 @@ int			get_y(char *file)
 		while (parsed_line[++i])
 			elems++;
 		if (elems != st_elems && st_elems != -1)
-			error("invalid map");
+			error("error: invalid map");
 		ft_arrclr(parsed_line);
 	}
 	return (elems);
@@ -104,11 +104,20 @@ void		parse(char *file, t_vector **coord, int x, int y)
 	}
 }
 
+void		init_img(t_view *view, t_img *img)
+{
+	img->img_ptr = mlx_new_image(view->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, img->img_ptr, 0, 0);
+	img->img = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
+	img->bits_per_pixel /= 8;
+}
+
 t_view		init(char *file)
 {
 	int		i;
 	int		j;
 	t_view	view;
+	t_img	img;
 
 	view.rows = get_x(file);
 	view.base = (t_vector**)ft_memalloc(sizeof(t_vector*) * view.rows);
@@ -117,8 +126,10 @@ t_view		init(char *file)
 	while (++i < view.rows)
 		view.base[i] = (t_vector*)ft_memalloc(sizeof(t_vector) * view.columns);
 	parse(file, view.base, view.rows, view.columns);
+
 	view.mlx_ptr = mlx_init();
 	view.win_ptr = mlx_new_window(view.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
+
 	view.angleX = 0; //45
 	view.angleY = 0; //-45
 	view.angleZ = 0; //-30
@@ -126,5 +137,8 @@ t_view		init(char *file)
 	view.height = -0.05;
 	view.translateX = WIN_WIDTH / 2;
 	view.translateY = WIN_HEIGHT / 2;
+
+	init_img(&view, &img);
+
 	return (view);
 }

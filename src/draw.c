@@ -53,6 +53,8 @@ t_vector	**copy(t_view *view) // ?
 	return (coord);
 }
 
+
+
 void		draw(t_view *view)
 {
 	int		i;
@@ -61,16 +63,8 @@ void		draw(t_view *view)
 	t_vector	**new_coord;
 	new_coord = copy(view);
 
-	// heigth(view, new_coord);
-	
-	
 	transformation(view, new_coord);
-	// rotate(view, new_coord, X_AXIS, view->angleX);
-	// rotate(view, new_coord, Y_AXIS, view->angleY);
-	// rotate(view, new_coord, Z_AXIS, view->angleZ);
 
-	// zoom(view, new_coord);
-	// translate(view, new_coord);
 	
 
 	i = -1;
@@ -89,5 +83,6 @@ void		draw(t_view *view)
 						new_coord[i][j].color);
 		}
 	}
+	// mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img->img_ptr, 0, 0);
 	delete_coord(view, new_coord);
 }

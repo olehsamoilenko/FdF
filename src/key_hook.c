@@ -18,7 +18,10 @@ int		key_hook(int key, void *v)
 	
 	view = (t_view*)v;
 	if (key == KEY_ESC)
+	{
+		// free(view->img->img);
 		exit(1);
+	}
 	else if (key == KEY_LEFT)
 		view->angleY += 10;
 	else if (key == KEY_RIGHT)

@@ -51,24 +51,36 @@ typedef struct	s_vector
 	int		color;
 }				t_vector;
 
+typedef struct	s_img
+{
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+	char		*img;
+	char		*img_ptr;
+}				t_img;
+
 typedef struct	s_view
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	
 	t_vector	**base;
 	int			rows;
 	int			columns;
 
-	int				angleX;
-	int				angleY;
-	int				angleZ;
-	int	zoom;
-	float			height;
-	int				translateX;
-	int				translateY;
-	
+	int			angleX;
+	int			angleY;
+	int			angleZ;
+	int			zoom;
+	float		height;
+	int			translateX;
+	int			translateY;
+
+	t_img		*img;
+
 }				t_view;
+
+
 
 void		line(t_view *view, int x0, int y0, int x1, int y1, int c);
 int			key_hook(int key, void *v);
