@@ -37,6 +37,8 @@ void		error(char *message)
 
 int			exit_func(void)
 {
+	// delete_coord(view->base);
+	// delete_coord(view, view->base);
 	exit(1);
 }
 
@@ -84,24 +86,7 @@ int			exit_func(void)
 
 
 
-t_vector	**copy(t_view *view) // ?
-{
-	int			i;
-	int			j;
-	t_vector	**coord;
 
-	coord = (t_vector**)ft_memalloc(sizeof(t_vector*) * view->rows);
-	i = -1;
-	while (++i < view->rows)
-	{
-		
-		coord[i] = (t_vector*)ft_memalloc(sizeof(t_vector) * view->columns);
-		j = -1;
-		while (++j < view->columns)
-			coord[i][j] = view->base[i][j];
-	}
-	return (coord);
-}
 
 
 
@@ -137,9 +122,8 @@ int			main(int args, char **argv)
 
 	mlx_hook(view.win_ptr, 2, 0, &key_hook, &view); // KEYS
 	mlx_hook(view.win_ptr, 17, 0, exit_func, 0); // CLOSE
-	mlx_loop(view.mlx_ptr);
 	
-
+	mlx_loop(view.mlx_ptr);
 	return (0);
 
 

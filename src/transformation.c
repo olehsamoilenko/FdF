@@ -42,8 +42,10 @@ void		transformation(t_view *view, t_vector **coord)
 			coord[i][j].x = tmp[0] * view->zoom + view->translateX;
 			coord[i][j].y = tmp[1] * view->zoom + view->translateY;
 			coord[i][j].z = tmp[2];
+
 		}
 	}
+
 }
 
 // void		rotate(t_view *view, t_vector **coord, int axis, int angle)

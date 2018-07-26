@@ -24,6 +24,7 @@ int			get_parsed_line(int fd, char ***parsed_line)
 		if (line[i] == '\t')
 			line[i] = ' ';
 	*parsed_line = ft_strsplit(line, ' ');
+	ft_strdel(&line);
 	return (1);
 }
 
@@ -38,7 +39,10 @@ int			get_x(char *file)
 		error("invalid file name");
 	lines = 0;
 	while (get_next_line(fd, &line))
+	{
 		lines++;
+		ft_strdel(&line);
+	}
 	close(fd);
 	return (lines);
 }
@@ -63,6 +67,7 @@ int			get_y(char *file)
 			elems++;
 		if (elems != st_elems && st_elems != -1)
 			error("invalid map");
+		ft_arrclr(parsed_line);
 	}
 	return (elems);
 }
@@ -90,10 +95,12 @@ void		parse(char *file, t_vector **coord, int x, int y)
 			node = ft_strsplit(parsed_line[j], ',');
 			coord[i][j].z = ft_atoi(node[0]);
 			coord[i][j].color = ft_atoi_base(node[1], 16);
+			ft_arrclr(node);
 			// coord[i][j] = base;
 			if (coord[i][j].color == 0)
 				coord[i][j].color = get_color(0, 200, 0);
 		}
+		ft_arrclr(parsed_line);
 	}
 }
 

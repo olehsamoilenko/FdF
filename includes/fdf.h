@@ -74,7 +74,7 @@ void		line(t_view *view, int x0, int y0, int x1, int y1, int c);
 int			key_hook(int key, void *v);
 void		draw(t_view *view);
 
-t_vector	**copy(t_view *view); // ?
+// t_vector	**copy(t_view *view); // ?
 // void		zoom(t_view *view, t_vector **coord);
 // void		heigth(t_view *view, t_vector **coord);
 int			get_color(unsigned char red, unsigned char green, unsigned char blue);
