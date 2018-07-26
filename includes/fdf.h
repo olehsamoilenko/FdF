@@ -75,7 +75,7 @@ typedef struct	s_view
 
 void		line(t_view *view, int x0, int y0, int x1, int y1, int c);
 int			key_hook(int key, void *v);
-void		print_lines(t_view *view);
+void		draw(t_view *view);
 
 t_vector	**copy(t_view *view); // ?
 void		rotate_all(t_view *view, t_vector **coord);

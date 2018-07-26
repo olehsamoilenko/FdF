@@ -8,7 +8,7 @@ LIBFLAGS = libft/libft.a -lmlx -framework OpenGL -framework AppKit
 LIST =	main \
 		line \
 		key_hook \
-		print_lines \
+		draw \
 		rotate
 
 SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))

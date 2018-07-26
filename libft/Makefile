@@ -37,6 +37,7 @@ LIST =	ft_memset \
 		ft_strcmp \
 		ft_strncmp \
 		ft_atoi \
+		ft_atoi_base \
 		ft_isalpha \
 		ft_isdigit \
 		ft_isalnum \
@@ -60,6 +61,7 @@ LIST =	ft_memset \
 		ft_strtrim \
 		ft_strsplit \
 		ft_itoa \
+		ft_itoa_base \
 		ft_putchar \
 		ft_putstr \
 		ft_putendl \
@@ -79,7 +81,6 @@ LIST =	ft_memset \
 		ft_wordscount \
 		ft_arrclr \
 		ft_lstaddend \
-		itoa_base \
 		get_next_line \
 		ft_printf \
 		parsing \

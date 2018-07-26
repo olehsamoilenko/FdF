@@ -85,7 +85,7 @@ int				type_unsigned(va_list argptr, t_pattern tmp)
 	if (nbr == 0 && tmp.precision == -1)
 		str = ft_strdup("");
 	else
-		str = itoa_base(nbr, 10, 1);
+		str = ft_itoa_base(nbr, 10, 1);
 	spaces = flags_handler(tmp, str);
 	return (print_u(spaces, str));
 }

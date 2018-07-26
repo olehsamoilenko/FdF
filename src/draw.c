@@ -24,7 +24,7 @@ void		show_coord(t_view *view, t_vector **new_coord)
 	}
 }
 
-void		print_lines(t_view *view)
+void		draw(t_view *view)
 {
 	int		i;
 	int		j;

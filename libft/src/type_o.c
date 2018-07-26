@@ -89,7 +89,7 @@ int					type_o(va_list argptr, t_pattern tmp)
 	if (nbr == 0 && tmp.precision == -1)
 		str = ft_strdup("");
 	else
-		str = itoa_base(nbr, 8, 0);
+		str = ft_itoa_base(nbr, 8, 0);
 	spaces = flags_handler(tmp, str);
 	return (print_o(spaces, (char*)str));
 }

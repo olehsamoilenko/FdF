@@ -46,6 +46,6 @@ int		key_hook(int key, void *v)
 	else if (key == TWO)
 		view->angleZ -= 10;
 	mlx_clear_window(view->mlx_ptr, view->win_ptr);
-	print_lines(view);
+	draw(view);
 	return (0);
 }

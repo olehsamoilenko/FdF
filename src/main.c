@@ -223,10 +223,6 @@ t_vector	**copy(t_view *view) // ?
 
 
 
-// t_vector	matrix_mult()
-// {
-
-// }
 
 int			main(int args, char **argv)
 {
@@ -236,18 +232,7 @@ int			main(int args, char **argv)
 
 	t_view	view = view_init(argv[1]);
 
-
-	// heigth(&view, -0.2);
-	// rotate(&view, X_AXIS, 40);
-	// rotate(&view, Y_AXIS, -40);
-	// rotate(&view, Z_AXIS, -30);
-	// zoom(&view, 30);
-	// translate(&view, X_AXIS, 400);
-	// translate(&view, Y_AXIS, 300);
-
-
-
-	print_lines(&view);
+	draw(&view);
 
 	mlx_hook(view.win_ptr, 2, 0, &key_hook, &view); // KEYS
 	mlx_hook(view.win_ptr, 17, 0, exit_func, 0); // CLOSE

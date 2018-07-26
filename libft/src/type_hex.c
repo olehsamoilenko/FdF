@@ -82,9 +82,9 @@ int				type_hex(va_list argptr, t_pattern tmp)
 	if (nbr == 0 && tmp.precision == -1)
 		str = ft_strdup("");
 	else if (tmp.type == 'x' || tmp.type == 'p')
-		str = itoa_base(nbr, 16, 0);
+		str = ft_itoa_base(nbr, 16, 0);
 	else
-		str = itoa_base(nbr, 16, 1);
+		str = ft_itoa_base(nbr, 16, 1);
 	spaces = flags_handler(tmp, str, nbr);
 	return (print_hex(spaces, str));
 }
