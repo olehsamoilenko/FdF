@@ -19,18 +19,7 @@
 # define L 4
 # define LL 5
 # define J 6
-# define _7BITS 127
-# define _8BITS 255
-# define _11BITS 2047
-# define _16BITS 65535
-# define _00000111 7
-# define _00001111 15
-# define _00011111 31
-# define _00111111 63
-# define _10000000 128
-# define _11000000 192
-# define _11100000 224
-# define _11110000 240
+# define BIN(a) ft_atoi_base(a, 2)
 # include <stdarg.h>
 
 typedef struct	s_pattern

@@ -14,11 +14,11 @@
 
 int		get_size(int c)
 {
-	if (c <= _7BITS || MB_CUR_MAX != 4)
+	if (c <= BIN("01111111") || MB_CUR_MAX != 4)
 		return (1);
-	else if (c <= _11BITS)
+	else if (c <= BIN("0000011111111111"))
 		return (2);
-	else if (c <= _16BITS)
+	else if (c <= BIN("1111111111111111"))
 		return (3);
 	else
 		return (4);
@@ -28,25 +28,25 @@ int		ft_putchar(int c)
 {
 	unsigned char	code[4];
 
-	if (c <= _7BITS || MB_CUR_MAX != 4)
+	if (c <= BIN("01111111") || MB_CUR_MAX != 4)
 		code[0] = c;
-	else if (c <= _11BITS)
+	else if (c <= BIN("0000011111111111"))
 	{
-		code[0] = (c >> 6 & _00011111) | _11000000;
-		code[1] = (c & _00111111) | _10000000;
+		code[0] = (c >> 6 & BIN("00011111")) | BIN("11000000");
+		code[1] = (c & BIN("00111111")) | BIN("10000000");
 	}
-	else if (c <= _16BITS)
+	else if (c <= BIN("1111111111111111"))
 	{
-		code[0] = (c >> 12 & _00001111) | _11100000;
-		code[1] = (c >> 6 & _00111111) | _10000000;
-		code[2] = (c & _00111111) | _10000000;
+		code[0] = (c >> 12 & BIN("00001111")) | BIN("11100000");
+		code[1] = (c >> 6 & BIN("00111111")) | BIN("10000000");
+		code[2] = (c & BIN("00111111")) | BIN("10000000");
 	}
 	else
 	{
-		code[0] = (c >> 18 & _00000111) | _11110000;
-		code[1] = (c >> 12 & _00111111) | _10000000;
-		code[2] = (c >> 6 & _00111111) | _10000000;
-		code[3] = (c & _00111111) | _10000000;
+		code[0] = (c >> 18 & BIN("00000111")) | BIN("11110000");
+		code[1] = (c >> 12 & BIN("00111111")) | BIN("10000000");
+		code[2] = (c >> 6 & BIN("00111111")) | BIN("10000000");
+		code[3] = (c & BIN("00111111")) | BIN("10000000");
 	}
 	write(1, &code, get_size(c));
 	return (get_size(c));
