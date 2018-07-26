@@ -33,13 +33,18 @@ void		draw(t_view *view)
 
 
 	new_coord = copy(view);
-	heigth(view, new_coord);
-	rotate_all(view, new_coord);
+
+	// heigth(view, new_coord);
+	
+	
+	transformation(view, new_coord);
 	// rotate(view, new_coord, X_AXIS, view->angleX);
 	// rotate(view, new_coord, Y_AXIS, view->angleY);
 	// rotate(view, new_coord, Z_AXIS, view->angleZ);
-	zoom(view, new_coord, view->zoom);
-	translate(view, new_coord);
+
+	// zoom(view, new_coord);
+	// translate(view, new_coord);
+	
 
 	int color;
 	i = -1;

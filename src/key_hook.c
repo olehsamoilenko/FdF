@@ -17,36 +17,41 @@ int		key_hook(int key, void *v)
 	t_view		*view;
 	
 	view = (t_view*)v;
-	if (key == ESC)
+	if (key == KEY_ESC)
 		exit(1);
-	else if (key == LEFT)
+	else if (key == KEY_LEFT)
 		view->angleY += 10;
-	else if (key == RIGHT)
+	else if (key == KEY_RIGHT)
 		view->angleY -= 10;
-	else if (key == UP)
+	else if (key == KEY_UP)
 		view->angleX -= 10;
-	else if (key == DOWN)
+	else if (key == KEY_DOWN)
 		view->angleX += 10;
-	else if (key == PLUS)
+	else if (key == KEY_PLUS)
 		view->zoom += 1;
-	else if (key == MINUS)
+	else if (key == KEY_MINUS)
+	{
 		view->zoom -= 1;
-	else if (key == W)
+		if (view->zoom < 0)
+			view->zoom = 0;
+	}
+	else if (key == KEY_W)
 		view->translateY += 5;
-	else if (key == S)
+	else if (key == KEY_S)
 		view->translateY -= 5;
-	else if (key == A)
+	else if (key == KEY_A)
 		view->translateX += 5;
-	else if (key == D)
+	else if (key == KEY_D)
 		view->translateX -= 5;
-	else if (key == ONE)
+	else if (key == KEY_ONE)
 		view->angleZ += 10;
-	else if (key == TWO)
+	else if (key == KEY_TWO)
 		view->angleZ -= 10;
-	else if (key == ARROW_UP)
+	else if (key == KEY_ARROW_UP)
 		view->height -= 0.1;
-	else if (key == ARROW_DOWN)
+	else if (key == KEY_ARROW_DOWN)
 		view->height += 0.1;
+
 	mlx_clear_window(view->mlx_ptr, view->win_ptr);
 	draw(view);
 	return (0);

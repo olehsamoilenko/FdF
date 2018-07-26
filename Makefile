@@ -9,7 +9,7 @@ LIST =	main \
 		line \
 		key_hook \
 		draw \
-		rotate \
+		transformation \
 		init
 
 SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))

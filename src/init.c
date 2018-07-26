@@ -111,13 +111,13 @@ t_view		init(char *file)
 		view.base[i] = (t_vector*)ft_memalloc(sizeof(t_vector) * view.columns);
 	parse(file, view.base, view.rows, view.columns);
 	view.mlx_ptr = mlx_init();
-	view.win_ptr = mlx_new_window(view.mlx_ptr, WIDTH, HEIGHT, "FdF");
+	view.win_ptr = mlx_new_window(view.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	view.angleX = 0; //45
 	view.angleY = 0; //-45
 	view.angleZ = 0; //-30
 	view.zoom = 30;
 	view.height = -0.05;
-	view.translateX = WIDTH / 2;
-	view.translateY = HEIGHT / 2;
+	view.translateX = WIN_WIDTH / 2;
+	view.translateY = WIN_HEIGHT / 2;
 	return (view);
 }

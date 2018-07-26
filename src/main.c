@@ -47,40 +47,40 @@ int			exit_func(void)
 
 
 
-void		zoom(t_view *view, t_vector **coord, int zoom)
-{
-	int		i;
-	int		j;
+// void		zoom(t_view *view, t_vector **coord)
+// {
+// 	int		i;
+// 	int		j;
 
-	if (zoom < 0)
-		zoom = 0;
-	i = -1;
-	while (++i < view->rows)
-	{
-		j = -1;
-		while (++j < view->columns)
-		{
-			coord[i][j].x *= zoom;
-			coord[i][j].y *= zoom;
-		}
-	}
-}
+// 	if (view->zoom < 0)
+// 		view->zoom = 0;
+// 	i = -1;
+// 	while (++i < view->rows)
+// 	{
+// 		j = -1;
+// 		while (++j < view->columns)
+// 		{
+// 			coord[i][j].x *= view->zoom;
+// 			coord[i][j].y *= view->zoom;
+// 		}
+// 	}
+// }
 
-void		heigth(t_view *view, t_vector **coord)
-{
-	int		i;
-	int		j;
+// void		heigth(t_view *view, t_vector **coord)
+// {
+// 	int		i;
+// 	int		j;
 
-	i = -1;
-	while (++i < view->rows)
-	{
-		j = -1;
-		while (++j < view->columns)
-		{
-			coord[i][j].z = view->base[i][j].z * view->height;
-		}
-	}
-}
+// 	i = -1;
+// 	while (++i < view->rows)
+// 	{
+// 		j = -1;
+// 		while (++j < view->columns)
+// 		{
+// 			coord[i][j].z = view->base[i][j].z * view->height;
+// 		}
+// 	}
+// }
 
 
 
@@ -105,22 +105,22 @@ t_vector	**copy(t_view *view) // ?
 
 
 
-void		translate(t_view *view, t_vector **coord)
-{
-	int		i;
-	int		j;
+// void		translate(t_view *view, t_vector **coord)
+// {
+// 	int		i;
+// 	int		j;
 
-	i = -1;
-	while (++i < view->rows)
-	{
-		j = -1;
-		while (++j < view->columns)
-		{
-			coord[i][j].x += view->translateX;
-			coord[i][j].y += view->translateY;
-		}
-	}
-}
+// 	i = -1;
+// 	while (++i < view->rows)
+// 	{
+// 		j = -1;
+// 		while (++j < view->columns)
+// 		{
+// 			coord[i][j].x += view->translateX;
+// 			coord[i][j].y += view->translateY;
+// 		}
+// 	}
+// }
 
 
 

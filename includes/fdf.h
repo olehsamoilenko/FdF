@@ -24,24 +24,24 @@
 # define Y_AXIS 1
 # define Z_AXIS 2
 
-# define ESC 53
-# define UP 126
-# define DOWN 125
-# define LEFT 123
-# define RIGHT 124
-# define W 13
-# define A 0 // ???????????
-# define S 1
-# define D 2 // ?????????
-# define ONE 18
-# define TWO 19
-# define PLUS 24
-# define MINUS 27
-# define ARROW_UP 116
-# define ARROW_DOWN 121
+# define KEY_ESC 53
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_W 13
+# define KEY_A 0 // ???????????
+# define KEY_S 1
+# define KEY_D 2 // ?????????
+# define KEY_ONE 18
+# define KEY_TWO 19
+# define KEY_PLUS 24
+# define KEY_MINUS 27
+# define KEY_ARROW_UP 116
+# define KEY_ARROW_DOWN 121
 
-# define HEIGHT 800
-# define WIDTH 1500
+# define WIN_HEIGHT 720
+# define WIN_WIDTH 1280
 
 typedef struct	s_vector
 {
@@ -50,15 +50,6 @@ typedef struct	s_vector
 	float	z;
 	int		color;
 }				t_vector;
-
-// typedef struct	s_params
-// {
-// 	int			angleX;
-// 	int			angleY;
-// 	int			angleZ;
-// 	int			zoom;
-// 	float		height;
-// }				t_params;
 
 typedef struct	s_view
 {
@@ -69,13 +60,13 @@ typedef struct	s_view
 	int			rows;
 	int			columns;
 
-	int			angleX;
-	int			angleY;
-	int			angleZ;
-	int			zoom;
-	float		height;
-	int			translateX;
-	int			translateY;
+	int				angleX;
+	int				angleY;
+	int				angleZ;
+	int	zoom;
+	float			height;
+	int				translateX;
+	int				translateY;
 	
 }				t_view;
 
@@ -84,13 +75,13 @@ int			key_hook(int key, void *v);
 void		draw(t_view *view);
 
 t_vector	**copy(t_view *view); // ?
-void		zoom(t_view *view, t_vector **coord, int zoom);
-void		heigth(t_view *view, t_vector **coord);
+// void		zoom(t_view *view, t_vector **coord);
+// void		heigth(t_view *view, t_vector **coord);
 int			get_color(unsigned char red, unsigned char green, unsigned char blue);
 
-void		rotate_all(t_view *view, t_vector **coord);
-void		rotate(t_view *view, t_vector **coord, int axis, int angle);
-void		translate(t_view *view, t_vector **coord);
+void		transformation(t_view *view, t_vector **coord);
+// void		rotate(t_view *view, t_vector **coord, int axis, int angle);
+// void		translate(t_view *view, t_vector **coord);
 
 t_view		init(char *file);
 
