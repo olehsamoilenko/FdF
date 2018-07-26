@@ -35,6 +35,7 @@ void		draw(t_view *view)
 	new_coord = copy(view);
 	// printf("copy\n"); show_coord(view, new_coord);
 	heigth(view, new_coord);
+
 	// printf("heigth\n"); show_coord(view, new_coord);
 	// rotate_all(view, new_coord);
 	rotate(view, new_coord, X_AXIS, view->angleX);
@@ -44,7 +45,9 @@ void		draw(t_view *view)
 	
 	
 	
+	
 	zoom(view, new_coord, view->zoom);
+	translate(view, new_coord);
 
 	int color;
 	i = -1;
@@ -56,33 +59,17 @@ void		draw(t_view *view)
 			
 			if (i < view->rows - 1)
 			{
-				if (view->base[i][j].z == 0 && view->base[i + 1][j].z == 0)
-					color = get_color(255, 0, 0);
-				else
-					color = get_color(255, 255, 255);
-				// if (view->base[i][j].z == 0)
-					line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
-								(int)new_coord[i + 1][j].x + WIDTH / 2, (int)new_coord[i + 1][j].y + HEIGHT / 2,
-								color);
-				// else
-				// 	line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
-				// 				(int)new_coord[i + 1][j].x + WIDTH / 2, (int)new_coord[i + 1][j].y + HEIGHT / 2,
-				// 				color(255, 255, 255));
+				line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
+							(int)new_coord[i + 1][j].x + WIDTH / 2, (int)new_coord[i + 1][j].y + HEIGHT / 2,
+							new_coord[i][j].color);
+
 			}
 			if (j < view->columns - 1)
 			{
-				if (view->base[i][j].z == 0 && view->base[i][j + 1].z == 0)
-					color = get_color(255, 0, 0);
-				else
-					color = get_color(255, 255, 255);
-				// if (view->base[i][j].z == 0)
-					line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
-								(int)new_coord[i][j + 1].x + WIDTH / 2, (int)new_coord[i][j + 1].y + HEIGHT / 2,
-								color);
-				// else
-					// line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
-					// 			(int)new_coord[i][j + 1].x + WIDTH / 2, (int)new_coord[i][j + 1].y + HEIGHT / 2,
-					// 			color(255, 255, 255));
+				line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
+							(int)new_coord[i][j + 1].x + WIDTH / 2, (int)new_coord[i][j + 1].y + HEIGHT / 2,
+							new_coord[i][j].color);
+
 			}
 		}
 	}

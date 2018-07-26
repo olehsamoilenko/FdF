@@ -37,6 +37,9 @@
 # define TWO 19
 # define PLUS 24
 # define MINUS 27
+# define ARROW_UP 116
+# define ARROW_DOWN 121
+
 # define HEIGHT 800
 # define WIDTH 1500
 
@@ -45,6 +48,7 @@ typedef struct	s_vector
 	float	x;
 	float	y;
 	float	z;
+	int		color;
 }				t_vector;
 
 // typedef struct	s_params
@@ -70,6 +74,8 @@ typedef struct	s_view
 	int			angleZ;
 	int			zoom;
 	float		height;
+	int			translateX;
+	int			translateY;
 	
 }				t_view;
 
@@ -85,6 +91,7 @@ int			get_color(unsigned char red, unsigned char green, unsigned char blue);
 
 // void		rotate_all(t_view *view, t_vector **coord);
 void		rotate(t_view *view, t_vector **coord, int axis, int angle);
+void		translate(t_view *view, t_vector **coord);
 
 t_view		init(char *file);
 

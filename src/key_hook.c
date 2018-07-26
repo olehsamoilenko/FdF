@@ -32,19 +32,21 @@ int		key_hook(int key, void *v)
 	else if (key == MINUS)
 		view->zoom -= 1;
 	else if (key == W)
-	{
-		view->height -= 0.1;
-		// printf("W\n");
-	}
+		view->translateY += 5;
 	else if (key == S)
-	{
-		view->height += 0.1;
-		// printf("S\n");
-	}
+		view->translateY -= 5;
+	else if (key == A)
+		view->translateX += 5;
+	else if (key == D)
+		view->translateX -= 5;
 	else if (key == ONE)
 		view->angleZ += 10;
 	else if (key == TWO)
 		view->angleZ -= 10;
+	else if (key == ARROW_UP)
+		view->height -= 0.1;
+	else if (key == ARROW_DOWN)
+		view->height += 0.1;
 	mlx_clear_window(view->mlx_ptr, view->win_ptr);
 	draw(view);
 	return (0);

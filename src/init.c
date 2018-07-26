@@ -12,6 +12,21 @@
 
 #include "fdf.h"
 
+int			get_parsed_line(int fd, char ***parsed_line)
+{
+	char	*line;
+	int		i;
+
+	if (!get_next_line(fd, &line))
+		return (0);
+	i = -1;
+	while (line[++i])
+		if (line[i] == '\t')
+			line[i] = ' ';
+	*parsed_line = ft_strsplit(line, ' ');
+	return (1);
+}
+
 int			get_x(char *file)
 {
 	int		fd;
@@ -26,21 +41,6 @@ int			get_x(char *file)
 		lines++;
 	close(fd);
 	return (lines);
-}
-
-int			get_parsed_line(int fd, char ***parsed_line)
-{
-	char	*line;
-	int		i;
-
-	if (!get_next_line(fd, &line))
-		return (0);
-	i = -1;
-	while (line[++i])
-		if (line[i] == '\t')
-			line[i] = ' ';
-	*parsed_line = ft_strsplit(line, ' ');
-	return (1);
 }
 
 int			get_y(char *file)
@@ -67,13 +67,14 @@ int			get_y(char *file)
 	return (elems);
 }
 
-void		parse(char *file, t_vector **p, int x, int y)
+void		parse(char *file, t_vector **coord, int x, int y)
 {
 	int		i;
 	int		j;
-	t_vector	base;
+	// t_vector	base;
 	int		fd;
 	char	**parsed_line;
+	char	**node;
 
 	fd = open(file, O_RDONLY);
 
@@ -84,10 +85,14 @@ void		parse(char *file, t_vector **p, int x, int y)
 		get_parsed_line(fd, &parsed_line);
 		while (++j < y)
 		{
-			base.x = j - y / 2;
-			base.y = i - x / 2;
-			base.z = ft_atoi(parsed_line[j]);
-			p[i][j] = base;
+			coord[i][j].x = j - y / 2;
+			coord[i][j].y = i - x / 2;
+			node = ft_strsplit(parsed_line[j], ',');
+			coord[i][j].z = ft_atoi(node[0]);
+			coord[i][j].color = ft_atoi_base(node[1], 16);
+			// coord[i][j] = base;
+			if (coord[i][j].color == 0)
+				coord[i][j].color = get_color(0, 200, 0);
 		}
 	}
 }
@@ -112,5 +117,7 @@ t_view		init(char *file)
 	view.angleZ = 0; //-30
 	view.zoom = 30;
 	view.height = -0.05;
+	view.translateX = 0;
+	view.translateY = 0;
 	return (view);
 }

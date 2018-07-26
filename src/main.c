@@ -105,24 +105,22 @@ t_vector	**copy(t_view *view) // ?
 
 
 
-// void		translate(t_view *view, int direction, int len)
-// {
-// 	int		i;
-// 	int		j;
+void		translate(t_view *view, t_vector **coord)
+{
+	int		i;
+	int		j;
 
-// 	i = -1;
-// 	while (++i < view->rows)
-// 	{
-// 		j = -1;
-// 		while (++j < view->columns)
-// 		{
-// 			if (direction == X_AXIS)
-// 				view->coord[i][j].x += len;
-// 			if (direction == Y_AXIS)
-// 				view->coord[i][j].y += len;
-// 		}
-// 	}
-// }
+	i = -1;
+	while (++i < view->rows)
+	{
+		j = -1;
+		while (++j < view->columns)
+		{
+			coord[i][j].x += view->translateX;
+			coord[i][j].y += view->translateY;
+		}
+	}
+}
 
 
 
