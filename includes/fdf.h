@@ -86,5 +86,9 @@ int			get_color(unsigned char red, unsigned char green, unsigned char blue);
 // void		rotate_all(t_view *view, t_vector **coord);
 void		rotate(t_view *view, t_vector **coord, int axis, int angle);
 
+t_view		init(char *file);
+
+void		error(char *message);
+
 
 #endif

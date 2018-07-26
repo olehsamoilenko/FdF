@@ -9,7 +9,8 @@ LIST =	main \
 		line \
 		key_hook \
 		draw \
-		rotate
+		rotate \
+		init
 
 SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))
 OBJ = $(addprefix obj/, $(addsuffix .o, $(LIST)))
