@@ -84,12 +84,11 @@ int			key_hook(int key, void *v);
 void		draw(t_view *view);
 
 t_vector	**copy(t_view *view); // ?
-void		rotate_all(t_view *view, t_vector **coord);
 void		zoom(t_view *view, t_vector **coord, int zoom);
 void		heigth(t_view *view, t_vector **coord);
 int			get_color(unsigned char red, unsigned char green, unsigned char blue);
 
-// void		rotate_all(t_view *view, t_vector **coord);
+void		rotate_all(t_view *view, t_vector **coord);
 void		rotate(t_view *view, t_vector **coord, int axis, int angle);
 void		translate(t_view *view, t_vector **coord);
 

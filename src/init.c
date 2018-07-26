@@ -117,7 +117,7 @@ t_view		init(char *file)
 	view.angleZ = 0; //-30
 	view.zoom = 30;
 	view.height = -0.05;
-	view.translateX = 0;
-	view.translateY = 0;
+	view.translateX = WIDTH / 2;
+	view.translateY = HEIGHT / 2;
 	return (view);
 }

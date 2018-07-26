@@ -33,19 +33,11 @@ void		draw(t_view *view)
 
 
 	new_coord = copy(view);
-	// printf("copy\n"); show_coord(view, new_coord);
 	heigth(view, new_coord);
-
-	// printf("heigth\n"); show_coord(view, new_coord);
-	// rotate_all(view, new_coord);
-	rotate(view, new_coord, X_AXIS, view->angleX);
-	rotate(view, new_coord, Y_AXIS, view->angleY);
-	rotate(view, new_coord, Z_AXIS, view->angleZ);
-	// printf("rotate\n"); show_coord(view, new_coord);
-	
-	
-	
-	
+	rotate_all(view, new_coord);
+	// rotate(view, new_coord, X_AXIS, view->angleX);
+	// rotate(view, new_coord, Y_AXIS, view->angleY);
+	// rotate(view, new_coord, Z_AXIS, view->angleZ);
 	zoom(view, new_coord, view->zoom);
 	translate(view, new_coord);
 
@@ -59,16 +51,16 @@ void		draw(t_view *view)
 			
 			if (i < view->rows - 1)
 			{
-				line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
-							(int)new_coord[i + 1][j].x + WIDTH / 2, (int)new_coord[i + 1][j].y + HEIGHT / 2,
-							new_coord[i][j].color);
+				line(view, new_coord[i][j].x, new_coord[i][j].y,
+						new_coord[i + 1][j].x, new_coord[i + 1][j].y,
+						new_coord[i][j].color);
 
 			}
 			if (j < view->columns - 1)
 			{
-				line(view, (int)new_coord[i][j].x + WIDTH / 2, (int)new_coord[i][j].y + HEIGHT / 2,
-							(int)new_coord[i][j + 1].x + WIDTH / 2, (int)new_coord[i][j + 1].y + HEIGHT / 2,
-							new_coord[i][j].color);
+				line(view, new_coord[i][j].x, new_coord[i][j].y,
+						new_coord[i][j + 1].x, new_coord[i][j + 1].y,
+						new_coord[i][j].color);
 
 			}
 		}
