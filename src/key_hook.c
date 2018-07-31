@@ -45,19 +45,19 @@ int		key_hook(int key, void *v)
 			view->zoom = 0;
 	}
 	else if (key == KEY_W)
-		view->moveY += 10;
+		view->moveY += 5;
 	else if (key == KEY_S)
-		view->moveY -= 10;
+		view->moveY -= 5;
 	else if (key == KEY_A)
-		view->moveX += 10;
+		view->moveX += 5;
 	else if (key == KEY_D)
-		view->moveX -= 10;
+		view->moveX -= 5;
 	
 	else if (key == KEY_ARROW_UP)
 		view->height -= 0.1;
 	else if (key == KEY_ARROW_DOWN)
 		view->height += 0.1;
-	else if (key == KEY_G)
+	else if (key == KEY_BACKSPACE)
 		default_settings(view);
 
 	// printf("x: %i y: %i z: %i\n", view->angleX, view->angleY, view->angleZ);

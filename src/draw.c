@@ -79,8 +79,7 @@ void		draw(t_view *view)
 		}
 	}
 
-	// line(view, 0, 0, WIN_WIDTH, WIN_HEIGHT, get_color(250, 0, 0));
-	// line(view, 0, WIN_HEIGHT, WIN_WIDTH, 0, get_color(250, 0, 0));
+	
 	// t_img *img = view->img;
 	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img.img_ptr, 0, 0);
 	// delete_coord(view, new_coord);

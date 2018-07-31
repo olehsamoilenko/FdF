@@ -98,7 +98,7 @@ void		parse(char *file, t_vector **base, int x, int y)
 			ft_arrclr(node);
 			// base[i][j] = base;
 			if (base[i][j].color == 0)
-				base[i][j].color = 0xFF00;
+				base[i][j].color = rgb_to_color(0, 255, 0);
 		}
 		ft_arrclr(parsed_line);
 	}

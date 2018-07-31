@@ -40,6 +40,13 @@ void		pixel_put_img(t_view *view, int x, int y, int color)
 // 		return (0);
 // }
 
+int			rgb_to_color(unsigned char red, unsigned char green, unsigned char blue)
+{
+	// int		color;
+
+	return (red << 16 | green << 8 | blue);
+}
+
 float		percent(int middle, int left, int right)
 {
 	if (right == left)
@@ -60,7 +67,7 @@ int			grad_color(int color1, int color2, float percent)
 	red = (color1 >> 16 & 0xFF) + percent * ((color2 >> 16 & 0xFF) - (color1 >> 16 & 0xFF));
 	green = (color1 >> 8 & 0xFF) + percent * ((color2 >> 8 & 0xFF) - (color1 >> 8 & 0xFF));
 	blue = (color1 & 0xFF) + percent * ((color2 & 0xFF) - (color1 & 0xFF));
-	return (red << 16 | green << 8 | blue);
+	return (rgb_to_color(red, green, blue));
 }
 
 void		line(t_view *view, int x0, int y0, int color0, int x1, int y1, int color1)
