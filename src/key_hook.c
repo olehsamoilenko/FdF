@@ -12,6 +12,8 @@
 
 #include "fdf.h"
 
+
+
 int		key_hook(int key, void *v)
 {
 	t_view		*view;
@@ -39,13 +41,13 @@ int		key_hook(int key, void *v)
 			view->zoom = 0;
 	}
 	else if (key == KEY_W)
-		view->translateY += 5;
+		view->translateY += 10;
 	else if (key == KEY_S)
-		view->translateY -= 5;
+		view->translateY -= 10;
 	else if (key == KEY_A)
-		view->translateX += 5;
+		view->translateX += 10;
 	else if (key == KEY_D)
-		view->translateX -= 5;
+		view->translateX -= 10;
 	else if (key == KEY_ONE)
 		view->angleZ += 10;
 	else if (key == KEY_TWO)
@@ -54,8 +56,11 @@ int		key_hook(int key, void *v)
 		view->height -= 0.1;
 	else if (key == KEY_ARROW_DOWN)
 		view->height += 0.1;
+	else if (key == KEY_G)
+		default_settings(view);
 
-	mlx_clear_window(view->mlx_ptr, view->win_ptr);
+	// mlx_clear_window(view->mlx_ptr, view->win_ptr);
+	ft_bzero(view->img.img, WIN_WIDTH * WIN_HEIGHT * view->img.bits_per_pixel);
 	draw(view);
 	return (0);
 }

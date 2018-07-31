@@ -24,33 +24,29 @@
 // 	}
 // }
 
-void		delete_coord(t_view *view, t_vector **coord)
-{
-	int			i;
 
-	i = -1;
-	while (++i < view->rows)
-		free(coord[i]);
-	free(coord);
-}
+// void		delete_coord(t_view *view, t_vector **coord)
+// {
+// 	int			i;
 
-t_vector	**copy(t_view *view) // ?
+// 	i = -1;
+// 	while (++i < view->rows)
+// 		free(coord[i]);
+// 	free(coord);
+// }
+
+void	copy(t_vector **from, t_vector **where, int rows, int columns) // ?
 {
 	int			i;
 	int			j;
-	t_vector	**coord;
 
-	coord = (t_vector**)ft_memalloc(sizeof(t_vector*) * view->rows);
 	i = -1;
-	while (++i < view->rows)
+	while (++i < rows)
 	{
-		
-		coord[i] = (t_vector*)ft_memalloc(sizeof(t_vector) * view->columns);
 		j = -1;
-		while (++j < view->columns)
-			coord[i][j] = view->base[i][j];
+		while (++j < columns)
+			where[i][j] = from[i][j];
 	}
-	return (coord);
 }
 
 
@@ -60,10 +56,11 @@ void		draw(t_view *view)
 	int		i;
 	int		j;
 
-	t_vector	**new_coord;
-	new_coord = copy(view);
+	// t_vector	**new_coord;
+	copy(view->base, view->mod, view->rows, view->columns);
 
-	transformation(view, new_coord);
+
+	transformation(view);
 
 	
 
@@ -74,15 +71,19 @@ void		draw(t_view *view)
 		while (++j < view->columns)
 		{
 			if (i < view->rows - 1)
-				line(view, new_coord[i][j].x, new_coord[i][j].y,
-						new_coord[i + 1][j].x, new_coord[i + 1][j].y,
-						new_coord[i][j].color);
+				line(view, view->mod[i][j].x, view->mod[i][j].y,
+						view->mod[i + 1][j].x, view->mod[i + 1][j].y,
+						view->mod[i][j].color);
 			if (j < view->columns - 1)
-				line(view, new_coord[i][j].x, new_coord[i][j].y,
-						new_coord[i][j + 1].x, new_coord[i][j + 1].y,
-						new_coord[i][j].color);
+				line(view, view->mod[i][j].x, view->mod[i][j].y,
+						view->mod[i][j + 1].x, view->mod[i][j + 1].y,
+						view->mod[i][j].color);
 		}
 	}
-	// mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img->img_ptr, 0, 0);
-	delete_coord(view, new_coord);
+
+	// line(view, 0, 0, WIN_WIDTH, WIN_HEIGHT, get_color(250, 0, 0));
+	// line(view, 0, WIN_HEIGHT, WIN_WIDTH, 0, get_color(250, 0, 0));
+	// t_img *img = view->img;
+	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img.img_ptr, 0, 0);
+	// delete_coord(view, new_coord);
 }

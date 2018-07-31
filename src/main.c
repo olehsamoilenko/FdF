@@ -42,68 +42,22 @@ int			exit_func(void)
 	exit(1);
 }
 
-// void		zoom(t_view *view, t_vector **coord)
-// {
-// 	int		i;
-// 	int		j;
 
-// 	if (view->zoom < 0)
-// 		view->zoom = 0;
-// 	i = -1;
-// 	while (++i < view->rows)
-// 	{
-// 		j = -1;
-// 		while (++j < view->columns)
-// 		{
-// 			coord[i][j].x *= view->zoom;
-// 			coord[i][j].y *= view->zoom;
-// 		}
-// 	}
-// }
-
-// void		heigth(t_view *view, t_vector **coord)
-// {
-// 	int		i;
-// 	int		j;
-
-// 	i = -1;
-// 	while (++i < view->rows)
-// 	{
-// 		j = -1;
-// 		while (++j < view->columns)
-// 		{
-// 			coord[i][j].z = view->base[i][j].z * view->height;
-// 		}
-// 	}
-// }
-
-// void		translate(t_view *view, t_vector **coord)
-// {
-// 	int		i;
-// 	int		j;
-
-// 	i = -1;
-// 	while (++i < view->rows)
-// 	{
-// 		j = -1;
-// 		while (++j < view->columns)
-// 		{
-// 			coord[i][j].x += view->translateX;
-// 			coord[i][j].y += view->translateY;
-// 		}
-// 	}
-// }
 
 
 
 
 int			main(int args, char **argv)
 {
+	t_view	view;
+
 	if (args != 2)
 		error("usage: ./fdf [filename]");
 	
 
-	t_view	view = init(argv[1]);
+	view = init(argv[1]);
+
+	// pixel_put_img(&view, 100, 100, get_color(0, 0, 250));
 
 	draw(&view);
 

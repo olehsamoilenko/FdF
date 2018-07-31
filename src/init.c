@@ -72,7 +72,7 @@ int			get_y(char *file)
 	return (elems);
 }
 
-void		parse(char *file, t_vector **coord, int x, int y)
+void		parse(char *file, t_vector **base, int x, int y)
 {
 	int		i;
 	int		j;
@@ -90,55 +90,83 @@ void		parse(char *file, t_vector **coord, int x, int y)
 		get_parsed_line(fd, &parsed_line);
 		while (++j < y)
 		{
-			coord[i][j].x = j - y / 2;
-			coord[i][j].y = i - x / 2;
+			base[i][j].x = j - y / 2;
+			base[i][j].y = i - x / 2;
 			node = ft_strsplit(parsed_line[j], ',');
-			coord[i][j].z = ft_atoi(node[0]);
-			coord[i][j].color = ft_atoi_base(node[1], 16);
+			base[i][j].z = ft_atoi(node[0]);
+			base[i][j].color = ft_atoi_base(node[1], 16);
 			ft_arrclr(node);
-			// coord[i][j] = base;
-			if (coord[i][j].color == 0)
-				coord[i][j].color = get_color(0, 200, 0);
+			// base[i][j] = base;
+			if (base[i][j].color == 0)
+				base[i][j].color = get_color(0, 200, 0);
 		}
 		ft_arrclr(parsed_line);
 	}
 }
 
-void		init_img(t_view *view, t_img *img)
+void		init_img(t_view *view)
 {
-	img->img_ptr = mlx_new_image(view->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, img->img_ptr, 0, 0);
-	img->img = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
-	img->bits_per_pixel /= 8;
+	
+	view->img.img_ptr = mlx_new_image(view->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	
+	view->img.img = mlx_get_data_addr(view->img.img_ptr, &view->img.bits_per_pixel, &view->img.size_line, &view->img.endian);
+	view->img.bits_per_pixel /= 8;
+
+	// view->img = img;
+	// mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img->img_ptr, 0, 0);
+
+	
+	// printf("img: %s ptr: %s\n", view->img->img, view->img->img_ptr);
+
 }
+
+t_vector	**create_map(int rows, int columns)
+{
+	int			i;
+	t_vector	**base;
+
+	base = (t_vector**)ft_memalloc(sizeof(t_vector*) * rows);
+	i = -1;
+	while (++i < rows)
+		base[i] = (t_vector*)ft_memalloc(sizeof(t_vector) * columns);
+	return (base);
+}
+
+void	default_settings(t_view *view)
+{
+	view->angleX = 0; //45
+	view->angleY = 0; //-45
+	view->angleZ = 0; //-30
+	view->zoom = 1;
+	view->height = -0.1;
+	// view->translateX = WIN_WIDTH / 2;
+	// view->translateY = WIN_HEIGHT / 2;
+	view->moveX = 0;
+	view->moveY = 0;
+}
+
+
 
 t_view		init(char *file)
 {
 	int		i;
 	int		j;
 	t_view	view;
-	t_img	img;
+	// t_img	img;
 
 	view.rows = get_x(file);
-	view.base = (t_vector**)ft_memalloc(sizeof(t_vector*) * view.rows);
 	view.columns = get_y(file);
-	i = -1;
-	while (++i < view.rows)
-		view.base[i] = (t_vector*)ft_memalloc(sizeof(t_vector) * view.columns);
+	view.base = create_map(view.rows, view.columns);
 	parse(file, view.base, view.rows, view.columns);
+	view.modified = create_map(view.rows, view.columns);
 
 	view.mlx_ptr = mlx_init();
 	view.win_ptr = mlx_new_window(view.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
 
-	view.angleX = 0; //45
-	view.angleY = 0; //-45
-	view.angleZ = 0; //-30
-	view.zoom = 30;
-	view.height = -0.05;
-	view.translateX = WIN_WIDTH / 2;
-	view.translateY = WIN_HEIGHT / 2;
+	default_settings(&view);
 
-	init_img(&view, &img);
+	init_img(&view);
+	// view.img = &img;
 
 	return (view);
 }

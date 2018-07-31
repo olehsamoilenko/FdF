@@ -20,9 +20,9 @@
 # include <math.h>
 # include <stdio.h> // trash
 
-# define X_AXIS 0
-# define Y_AXIS 1
-# define Z_AXIS 2
+// # define X_AXIS 0
+// # define Y_AXIS 1
+// # define Z_AXIS 2
 
 # define KEY_ESC 53
 # define KEY_UP 126
@@ -39,6 +39,7 @@
 # define KEY_MINUS 27
 # define KEY_ARROW_UP 116
 # define KEY_ARROW_DOWN 121
+# define KEY_G 5
 
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1280
@@ -64,7 +65,11 @@ typedef struct	s_view
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+
+
 	t_vector	**base;
+	t_vector	**mod;
+
 	int			rows;
 	int			columns;
 
@@ -73,10 +78,10 @@ typedef struct	s_view
 	int			angleZ;
 	int			zoom;
 	float		height;
-	int			translateX;
-	int			translateY;
+	int			moveX;
+	int			moveY;
 
-	t_img		*img;
+	t_img		img; // !
 
 }				t_view;
 
@@ -86,16 +91,13 @@ void		line(t_view *view, int x0, int y0, int x1, int y1, int c);
 int			key_hook(int key, void *v);
 void		draw(t_view *view);
 
-// t_vector	**copy(t_view *view); // ?
-// void		zoom(t_view *view, t_vector **coord);
-// void		heigth(t_view *view, t_vector **coord);
 int			get_color(unsigned char red, unsigned char green, unsigned char blue);
-
-void		transformation(t_view *view, t_vector **coord);
-// void		rotate(t_view *view, t_vector **coord, int axis, int angle);
-// void		translate(t_view *view, t_vector **coord);
+void		transformation(t_view *view);
 
 t_view		init(char *file);
+void		default_settings(t_view *view);
+
+void		pixel_put_img(t_view *view, int x, int y, int color);
 
 void		error(char *message);
 

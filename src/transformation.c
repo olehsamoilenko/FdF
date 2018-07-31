@@ -12,12 +12,12 @@
 
 #include "fdf.h"
 
-void		transformation(t_view *view, t_vector **coord)
+void		transformation(t_view *view)
 {
-	int		j;
-	int		i;
-	double	tmp[3];
-	float	angle;
+	int			j;
+	int			i;
+	t_vector	dot;
+	float		angle;
 
 	float x = view->angleX * M_PI / 180;
 	float y = view->angleY * M_PI / 180;
@@ -28,24 +28,21 @@ void		transformation(t_view *view, t_vector **coord)
 		j = -1;
 		while (++j < view->columns)
 		{
-
-			coord[i][j].z *= view->height;
-			tmp[0] =	(cos(y) * cos(z)) * coord[i][j].x +
-						(-cos(y) * sin(z)) * coord[i][j].y +
-						(sin(y)) * coord[i][j].z;
-			tmp[1] =	(sin(x) * sin(y) * cos(z) + cos(x) * sin(z)) * coord[i][j].x +
-						(cos(x) * cos(z) - sin(x) * sin(y) * sin(z)) * coord[i][j].y +
-						(-sin(x) * cos(y)) * coord[i][j].z;
-			tmp[2] =	(sin(x) * sin(z) - cos(x) * sin(y) * cos(z)) * coord[i][j].x +
-						(cos(x) * sin(y) * sin(z) + sin(x) * cos(z)) * coord[i][j].y +
-						(cos(x) * cos(y)) * coord[i][j].z;
-			coord[i][j].x = tmp[0] * view->zoom + view->translateX;
-			coord[i][j].y = tmp[1] * view->zoom + view->translateY;
-			coord[i][j].z = tmp[2];
-
+			view->mod[i][j].z *= view->height;
+			dot.x =	(cos(y) * cos(z)) * view->mod[i][j].x +
+					(-cos(y) * sin(z)) * view->mod[i][j].y +
+					(sin(y)) * view->mod[i][j].z;
+			dot.y =	(sin(x) * sin(y) * cos(z) + cos(x) * sin(z)) * view->mod[i][j].x +
+					(cos(x) * cos(z) - sin(x) * sin(y) * sin(z)) * view->mod[i][j].y +
+					(-sin(x) * cos(y)) * view->mod[i][j].z;
+			dot.z =	(sin(x) * sin(z) - cos(x) * sin(y) * cos(z)) * view->mod[i][j].x +
+					(cos(x) * sin(y) * sin(z) + sin(x) * cos(z)) * view->mod[i][j].y +
+					(cos(x) * cos(y)) * view->mod[i][j].z;
+			view->mod[i][j].x = view->zoom * (dot.x + view->moveX) + WIN_WIDTH / 2;
+			view->mod[i][j].y = view->zoom * (dot.y + view->moveY) + WIN_HEIGHT / 2;
+			view->mod[i][j].z = dot.z;
 		}
 	}
-
 }
 
 // void		rotate(t_view *view, t_vector **coord, int axis, int angle)
