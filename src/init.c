@@ -134,10 +134,10 @@ t_vector	**create_map(int rows, int columns)
 
 void	default_settings(t_view *view)
 {
-	view->angleX = 0; //45
+	view->angleX = -50; //45
 	view->angleY = 0; //-45
-	view->angleZ = 0; //-30
-	view->zoom = 1;
+	view->angleZ = 40; //-30
+	view->zoom = WIN_WIDTH / (2 * view->columns);
 	view->height = -0.1;
 	// view->translateX = WIN_WIDTH / 2;
 	// view->translateY = WIN_HEIGHT / 2;

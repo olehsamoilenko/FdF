@@ -32,6 +32,10 @@ int		key_hook(int key, void *v)
 		view->angleX -= 10;
 	else if (key == KEY_DOWN)
 		view->angleX += 10;
+	else if (key == KEY_ONE)
+		view->angleZ -= 10;
+	else if (key == KEY_TWO)
+		view->angleZ += 10;
 	else if (key == KEY_PLUS)
 		view->zoom += 1;
 	else if (key == KEY_MINUS)
@@ -48,10 +52,7 @@ int		key_hook(int key, void *v)
 		view->moveX += 10;
 	else if (key == KEY_D)
 		view->moveX -= 10;
-	else if (key == KEY_ONE)
-		view->angleZ += 10;
-	else if (key == KEY_TWO)
-		view->angleZ -= 10;
+	
 	else if (key == KEY_ARROW_UP)
 		view->height -= 0.1;
 	else if (key == KEY_ARROW_DOWN)
@@ -59,6 +60,7 @@ int		key_hook(int key, void *v)
 	else if (key == KEY_G)
 		default_settings(view);
 
+	// printf("x: %i y: %i z: %i\n", view->angleX, view->angleY, view->angleZ);
 	// mlx_clear_window(view->mlx_ptr, view->win_ptr);
 	ft_bzero(view->img.img, WIN_WIDTH * WIN_HEIGHT * view->img.bits_per_pixel);
 	draw(view);

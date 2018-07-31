@@ -26,19 +26,19 @@ void		pixel_put_img(t_view *view, int x, int y, int color)
 	// printf("%d %d\n", color, mlx_get_color_value(view->mlx_ptr, color));
 }
 
-int			get_color(int color, int base_color)
-{
-	// 
+// int			get_color(int color, int base_color)
+// {
+// 	// 
 
-	if (base_color == RED)
-		return (color >> 16 & 0xFF);
-	else if (base_color == GREEN)
-		return (color >> 8 & 0xFF);
-	else if (base_color == BLUE)
-		return (color & 0xFF);
-	else
-		return (0);
-}
+// 	if (base_color == RED)
+// 		return (color >> 16 & 0xFF);
+// 	else if (base_color == GREEN)
+// 		return (color >> 8 & 0xFF);
+// 	else if (base_color == BLUE)
+// 		return (color & 0xFF);
+// 	else
+// 		return (0);
+// }
 
 float		percent(int middle, int left, int right)
 {
@@ -53,9 +53,13 @@ int			grad_color(int color1, int color2, float percent)
 	int		green;
 	int		blue;
 
-	red = get_color(color1, RED) + percent * (get_color(color2, RED) - get_color(color1, RED));
-	green = get_color(color1, GREEN) + percent * (get_color(color2, GREEN) - get_color(color1, GREEN));
-	blue = get_color(color1, BLUE) + percent * (get_color(color2, BLUE) - get_color(color1, BLUE));
+	// red = get_color(color1, RED) + percent * (get_color(color2, RED) - get_color(color1, RED));
+	// green = get_color(color1, GREEN) + percent * (get_color(color2, GREEN) - get_color(color1, GREEN));
+	// blue = get_color(color1, BLUE) + percent * (get_color(color2, BLUE) - get_color(color1, BLUE));
+
+	red = (color1 >> 16 & 0xFF) + percent * ((color2 >> 16 & 0xFF) - (color1 >> 16 & 0xFF));
+	green = (color1 >> 8 & 0xFF) + percent * ((color2 >> 8 & 0xFF) - (color1 >> 8 & 0xFF));
+	blue = (color1 & 0xFF) + percent * ((color2 & 0xFF) - (color1 & 0xFF));
 	return (red << 16 | green << 8 | blue);
 }
 
