@@ -87,11 +87,11 @@ typedef struct	s_view
 
 
 
-void		line(t_view *view, int x0, int y0, int x1, int y1, int c);
+void		line(t_view *view, int x0, int y0, int color0, int x1, int y1, int color1);
 int			key_hook(int key, void *v);
 void		draw(t_view *view);
 
-int			get_color(unsigned char red, unsigned char green, unsigned char blue);
+// int			get_color(unsigned char red, unsigned char green, unsigned char blue);
 void		transformation(t_view *view);
 
 t_view		init(char *file);

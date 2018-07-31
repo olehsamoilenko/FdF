@@ -13,17 +13,17 @@
 #include "fdf.h"
 #include <stdio.h> //trash
 
-#define MIN_GREEN 256
-#define MIN_RED 65536
+// #define MIN_GREEN 256
+// #define MIN_RED 65536
 
-int			get_color(unsigned char red, unsigned char green, unsigned char blue)
-{
-	int		color;
+// int			get_color(unsigned char red, unsigned char green, unsigned char blue)
+// {
+// 	int		color;
 
-	color = red * MIN_RED + green * MIN_GREEN + blue;
-	// printf("%d\n", color);
-	return (color);
-}
+// 	color = red * MIN_RED + green * MIN_GREEN + blue;
+// 	// printf("%d\n", color);
+// 	return (color);
+// }
 
 void		error(char *message)
 {

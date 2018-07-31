@@ -41,13 +41,13 @@ int		key_hook(int key, void *v)
 			view->zoom = 0;
 	}
 	else if (key == KEY_W)
-		view->translateY += 10;
+		view->moveY += 10;
 	else if (key == KEY_S)
-		view->translateY -= 10;
+		view->moveY -= 10;
 	else if (key == KEY_A)
-		view->translateX += 10;
+		view->moveX += 10;
 	else if (key == KEY_D)
-		view->translateX -= 10;
+		view->moveX -= 10;
 	else if (key == KEY_ONE)
 		view->angleZ += 10;
 	else if (key == KEY_TWO)

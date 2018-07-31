@@ -71,13 +71,11 @@ void		draw(t_view *view)
 		while (++j < view->columns)
 		{
 			if (i < view->rows - 1)
-				line(view, view->mod[i][j].x, view->mod[i][j].y,
-						view->mod[i + 1][j].x, view->mod[i + 1][j].y,
-						view->mod[i][j].color);
+				line(view, view->mod[i][j].x, view->mod[i][j].y, view->mod[i][j].color,
+						view->mod[i + 1][j].x, view->mod[i + 1][j].y, view->mod[i + 1][j].color);
 			if (j < view->columns - 1)
-				line(view, view->mod[i][j].x, view->mod[i][j].y,
-						view->mod[i][j + 1].x, view->mod[i][j + 1].y,
-						view->mod[i][j].color);
+				line(view, view->mod[i][j].x, view->mod[i][j].y, view->mod[i][j].color,
+						view->mod[i][j + 1].x, view->mod[i][j + 1].y, view->mod[i][j + 1].color);
 		}
 	}
 
