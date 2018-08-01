@@ -1,7 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: osamoile <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/08/01 15:53:40 by osamoile          #+#    #+#              #
+#    Updated: 2018/08/01 15:53:44 by osamoile         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fdf
-
 HEADER = -I ./includes -I ./libft/includes 
-
 FLAGS = -Wall -Werror -Wextra
 LIBFLAGS = libft/libft.a -lmlx -framework OpenGL -framework AppKit
 

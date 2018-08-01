@@ -11,9 +11,7 @@
 # **************************************************************************** #
 
 NAME = libft.a
-
-HEADERS = -I./includes
-
+HEADERS = -I ./includes
 FLAGS = -Wall -Werror -Wextra
 
 LIST =	ft_memset \
