@@ -18,15 +18,13 @@ SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))
 OBJ = $(addprefix obj/, $(addsuffix .o, $(LIST)))
 
 obj/%.o: src/%.c
-	#FLAGS2
-	@gcc -c $< -o $@ $(HEADER)
+	@gcc $(FLAGS) -c $< -o $@ $(HEADER)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	#FLAGS1
-	@gcc $(OBJ) -o $(NAME) $(HEADER) $(LIBFLAGS)
+	@gcc $(FLAGS) $(LIBFLAGS) $(OBJ) -o $(NAME) $(HEADER)
 
 clean:
 	@make -C libft clean

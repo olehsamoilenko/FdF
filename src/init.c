@@ -46,8 +46,6 @@ void			default_settings(t_view *view)
 
 t_view			init(char *file)
 {
-	int		i;
-	int		j;
 	t_view	view;
 
 	view.rows = get_x(file);

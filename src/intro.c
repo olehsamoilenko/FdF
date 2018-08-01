@@ -57,7 +57,6 @@ void		frame(t_view *view)
 {
 	int		i;
 	int		j;
-	char	*s;
 
 	i = -1;
 	while (++i < 70)

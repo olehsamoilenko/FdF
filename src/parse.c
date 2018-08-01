@@ -52,7 +52,6 @@ int			get_x(char *file)
 int			get_y(char *file)
 {
 	int		fd;
-	char	*line;
 	char	**parsed_line;
 	int		elems;
 	int		st_elems;
