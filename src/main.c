@@ -84,11 +84,22 @@ void		circle(t_view *view, int x0, int y0, int radius, int color)
 
 }
 
+void		frame_labels(t_view *view)
+{
+	char	*s;
 
-void		intro(t_view *view)
+	s = "FdF";
+	mlx_string_put(view->mlx_ptr, view->win_ptr, (WIN_WIDTH - ft_strlen(s) * ALPHA_WIDTH) / 2, 35 - ALPHA_HEIGHT / 2, rgb_to_color(255, 255, 255), s);
+	s = "osamoile";
+	mlx_string_put(view->mlx_ptr, view->win_ptr, (WIN_WIDTH - ft_strlen(s) * ALPHA_WIDTH) / 2, WIN_HEIGHT - 35 - ALPHA_HEIGHT / 2, rgb_to_color(255, 255, 255), s);
+	
+}
+
+void		frame(t_view *view)
 {
 	int		i;
 	int		j;
+	char	*s;
 
 	i = -1;
 	while (++i < 70)
@@ -106,13 +117,12 @@ void		intro(t_view *view)
 		pixel_put_img(view, j, i, rgb_to_color(255, 255, 255));
 		pixel_put_img(view, j, WIN_HEIGHT - i, rgb_to_color(255, 255, 255));
 	}
-	circle(view, WIN_WIDTH / 2, WIN_HEIGHT / 2, 200, rgb_to_color(100, 0, 0));
-	line(view, 0, 0, rgb_to_color(250, 0, 0), WIN_WIDTH, WIN_HEIGHT, rgb_to_color(250, 0, 0));
-	line(view, 0, WIN_HEIGHT, rgb_to_color(250, 0, 0), WIN_WIDTH, 0, rgb_to_color(250, 0, 0));
+	// mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img.img_ptr, 0, 0);
 	
-	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img.img_ptr, 0, 0);
-	char *s = "PRESS ANY KEY";
-	mlx_string_put(view->mlx_ptr, view->win_ptr, (WIN_WIDTH - ft_strlen(s) * ALPHA_WIDTH) / 2, (WIN_HEIGHT - ALPHA_HEIGHT) / 2, rgb_to_color(255, 255, 255), s);
+}
+
+void		help(t_view *view)
+{
 	mlx_string_put(view->mlx_ptr, view->win_ptr, 50, 100, rgb_to_color(255, 255, 255), "ZOOM     : + -");
 	mlx_string_put(view->mlx_ptr, view->win_ptr, 50, 120, rgb_to_color(255, 255, 255), "MOVE     : W A S D");
 	mlx_string_put(view->mlx_ptr, view->win_ptr, 50, 140, rgb_to_color(255, 255, 255), "RELIEF   : PAGE UP / DOWN");
@@ -122,6 +132,21 @@ void		intro(t_view *view)
 	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - 320, 580, rgb_to_color(255, 255, 255), "RESET    : BACKSPACE");
 	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - 320, 600, rgb_to_color(255, 255, 255), "EXIT     : ESC");
 	mlx_string_put(view->mlx_ptr, view->win_ptr, 50, 600, rgb_to_color(255, 255, 255), "HELP     : H"); // !
+}
+
+
+void		intro(t_view *view)
+{
+	
+	circle(view, WIN_WIDTH / 2, WIN_HEIGHT / 2, 200, rgb_to_color(100, 0, 0));
+	frame(view);
+	// line(view, 0, 0, rgb_to_color(250, 0, 0), WIN_WIDTH, WIN_HEIGHT, rgb_to_color(250, 0, 0));
+	// line(view, 0, WIN_HEIGHT, rgb_to_color(250, 0, 0), WIN_WIDTH, 0, rgb_to_color(250, 0, 0));
+	
+	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img.img_ptr, 0, 0);
+	char *s = "PRESS ANY KEY";
+	mlx_string_put(view->mlx_ptr, view->win_ptr, (WIN_WIDTH - ft_strlen(s) * ALPHA_WIDTH) / 2, (WIN_HEIGHT - ALPHA_HEIGHT) / 2, rgb_to_color(255, 255, 255), s);
+	frame_labels(view);
 	
 }
 

@@ -143,6 +143,7 @@ void	default_settings(t_view *view)
 	// view->translateY = WIN_HEIGHT / 2;
 	view->moveX = 0;
 	view->moveY = 0;
+	view->help = 1;
 }
 
 

@@ -40,12 +40,13 @@
 # define KEY_ARROW_UP 116
 # define KEY_ARROW_DOWN 121
 # define KEY_BACKSPACE 51
-
+# define KEY_H 4
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1280
 
 # define ALPHA_HEIGHT 22
 # define ALPHA_WIDTH 10
+
 typedef struct	s_vector
 {
 	float	x;
@@ -85,6 +86,8 @@ typedef struct	s_view
 
 	t_img		img; // !
 
+	int			help;
+
 }				t_view;
 
 
@@ -103,6 +106,10 @@ int			rgb_to_color(unsigned char red, unsigned char green, unsigned char blue);
 void		pixel_put_img(t_view *view, int x, int y, int color);
 
 void		error(char *message);
+
+void		help(t_view *view);
+void		frame(t_view *view);
+void		frame_labels(t_view *view);
 
 
 #endif

@@ -78,9 +78,13 @@ void		draw(t_view *view)
 						view->mod[i][j + 1].x, view->mod[i][j + 1].y, view->mod[i][j + 1].color);
 		}
 	}
+	frame(view);
 
 	
 	// t_img *img = view->img;
 	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img.img_ptr, 0, 0);
+	frame_labels(view);
+	if (view->help)
+		help(view);
 	// delete_coord(view, new_coord);
 }
