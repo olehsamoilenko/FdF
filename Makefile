@@ -10,7 +10,9 @@ LIST =	main \
 		key_hook \
 		draw \
 		transformation \
-		init
+		init \
+		parse \
+		intro
 
 SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))
 OBJ = $(addprefix obj/, $(addsuffix .o, $(LIST)))

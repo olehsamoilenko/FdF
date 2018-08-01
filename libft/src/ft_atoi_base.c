@@ -51,9 +51,3 @@ int		ft_atoi_base(char *nb, int base)
 		res += convert(nb[len], base) * power(base, position++);
 	return (res);
 }
-
-// int		main(void)
-// {
-// 	printf("res: %i\n", ft_atoi_base("0xFF2A", 16));
-// 	return (0);
-// }

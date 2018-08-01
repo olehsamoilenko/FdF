@@ -12,30 +12,20 @@
 
 #include "fdf.h"
 
-// void		show_coord(t_view *view, t_vector **new_coord)
-// {
-// 	int i = -1;
-// 	int j;
-// 	while (++i < view->rows)
-// 	{
-// 		j = -1;
-// 		while (++j < view->columns)
-// 			printf("(%i,%i) x: %f y: %f z: %f\n", i, j, new_coord[i][j].x, new_coord[i][j].y, new_coord[i][j].z);
-// 	}
-// }
+void		pixel_put_img(t_view *view, int x, int y, int color)
+{
+	if (x <= 0 || x >= WIN_WIDTH || y <= 0 || y >= WIN_HEIGHT)
+		return ;
+	*(int *)(view->img.img + x * view->img.bits_per_pixel +
+		y * view->img.size_line) = mlx_get_color_value(view->mlx_ptr, color);
+}
 
+int			rgb_to_color(unsigned char r, unsigned char g, unsigned char b)
+{
+	return (r << 16 | g << 8 | b);
+}
 
-// void		delete_coord(t_view *view, t_vector **coord)
-// {
-// 	int			i;
-
-// 	i = -1;
-// 	while (++i < view->rows)
-// 		free(coord[i]);
-// 	free(coord);
-// }
-
-void	copy(t_vector **from, t_vector **where, int rows, int columns) // ?
+static void	copy(t_vector **from, t_vector **where, int rows, int columns)
 {
 	int			i;
 	int			j;
@@ -49,21 +39,13 @@ void	copy(t_vector **from, t_vector **where, int rows, int columns) // ?
 	}
 }
 
-
-
 void		draw(t_view *view)
 {
 	int		i;
 	int		j;
 
-	// t_vector	**new_coord;
 	copy(view->base, view->mod, view->rows, view->columns);
-
-
 	transformation(view);
-
-	
-
 	i = -1;
 	while (++i < view->rows)
 	{
@@ -71,20 +53,15 @@ void		draw(t_view *view)
 		while (++j < view->columns)
 		{
 			if (i < view->rows - 1)
-				line(view, view->mod[i][j].x, view->mod[i][j].y, view->mod[i][j].color,
-						view->mod[i + 1][j].x, view->mod[i + 1][j].y, view->mod[i + 1][j].color);
+				line(view, view->mod[i][j], view->mod[i + 1][j]);
 			if (j < view->columns - 1)
-				line(view, view->mod[i][j].x, view->mod[i][j].y, view->mod[i][j].color,
-						view->mod[i][j + 1].x, view->mod[i][j + 1].y, view->mod[i][j + 1].color);
+				line(view, view->mod[i][j], view->mod[i][j + 1]);
 		}
 	}
 	frame(view);
-
-	
-	// t_img *img = view->img;
-	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr, view->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(view->mlx_ptr, view->win_ptr,
+		view->img.img_ptr, 0, 0);
 	frame_labels(view);
 	if (view->help)
 		help(view);
-	// delete_coord(view, new_coord);
 }
