@@ -35,15 +35,21 @@ int			get_x(char *file)
 	int		lines;
 
 	fd = open(file, O_RDONLY);
+
 	if (fd < 0)
 		error("error: invalid file name");
 	lines = 0;
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
+		// printf("'%s'\n", line);
+		// if (ft_strequ(line, 0))
+		// 	error("error: invalid file");
 		lines++;
 		ft_strdel(&line);
 	}
 	close(fd);
+	if (lines == 0)
+		error("error: empty file");
 	return (lines);
 }
 
@@ -69,6 +75,8 @@ int			get_y(char *file)
 			error("error: invalid map");
 		ft_arrclr(parsed_line);
 	}
+	if (elems == 0)
+		error("error: empty file");
 	return (elems);
 }
 
