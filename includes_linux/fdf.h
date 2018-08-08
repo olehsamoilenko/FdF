@@ -39,7 +39,7 @@
 # include "mlx.h"
 # include <fcntl.h>
 # include <math.h>
-# include <stdint.h>
+# include <stdint.h> //linux
 
 typedef struct	s_vector
 {

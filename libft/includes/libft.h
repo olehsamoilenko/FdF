@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h> //linux
 # include "get_next_line.h"
 # include "printf.h"
 
