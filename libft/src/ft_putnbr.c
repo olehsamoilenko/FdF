@@ -30,9 +30,7 @@ static void	fill_and_put(int n, char *buf)
 void		ft_putnbr(int n)
 {
 	char	buf[10000];
-	int		i;
 
-	i = 0;
 	if (n == -2147483648)
 	{
 		ft_putnbr(-214748364);
