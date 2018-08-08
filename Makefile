@@ -15,6 +15,7 @@ HEADER = -I ./includes -I ./libft/includes -I ./mlx
 HEADER_LINUX = -I ./includes_linux -I ./libft/includes -I ./mlx
 FLAGS = -Wall -Werror -Wextra
 LIBFLAGS = libft/libft.a mlx/libmlx.a -framework OpenGL -framework AppKit
+LIBFLAGS_LINUX = libft/libft.a mlx/libmlx.a -lm -lmlx -lXext -lX11
 
 LIST =	main \
 		line \
@@ -49,4 +50,4 @@ re: fclean all
 
 linux:
 	@make -C libft
-	@gcc $(FLAGS) $(LIBFLAGS) $(OBJ) -o $(NAME) $(HEADER_LINUX)
+	@gcc $(FLAGS) $(LIBFLAGS_LINUX) $(OBJ) -o $(NAME) $(HEADER_LINUX)
