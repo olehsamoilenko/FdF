@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 NAME = fdf
-HEADER = -I ./includes -I ./libft/includes 
+HEADER = -I ./includes -I ./libft/includes -I ./mlx
 FLAGS = -Wall -Werror -Wextra
-LIBFLAGS = libft/libft.a -lmlx -framework OpenGL -framework AppKit
+LIBFLAGS = libft/libft.a mlx/libmlx.a -framework OpenGL -framework AppKit
 
 LIST =	main \
 		line \
