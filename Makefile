@@ -12,6 +12,7 @@
 
 NAME = fdf
 HEADER = -I ./includes -I ./libft/includes -I ./mlx
+HEADER_LINUX = -I ./includes_linux -I ./libft/includes -I ./mlx
 FLAGS = -Wall -Werror -Wextra
 LIBFLAGS = libft/libft.a mlx/libmlx.a -framework OpenGL -framework AppKit
 
@@ -45,3 +46,7 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+linux:
+	@make -C libft
+	@gcc $(FLAGS) $(LIBFLAGS) $(OBJ) -o $(NAME) $(HEADER_LINUX)
