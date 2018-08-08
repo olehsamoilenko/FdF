@@ -6,16 +6,14 @@
 #    By: osamoile <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/01 15:53:40 by osamoile          #+#    #+#              #
-#    Updated: 2018/08/01 15:53:44 by osamoile         ###   ########.fr        #
+#    Updated: 2018/08/08 22:22:39 by osamoile         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-HEADER = -I ./includes -I ./libft/includes -I ./mlx
-HEADER_LINUX = -I ./includes_linux -I ./libft/includes -I ./mlx
+HEADER = -I ./includes -I ./libft/includes
 FLAGS = -Wall -Werror -Wextra
-LIBFLAGS = libft/libft.a mlx/libmlx.a -framework OpenGL -framework AppKit
-LIBFLAGS_LINUX = libft/libft.a mlx/libmlx.a -lm -lmlx -lXext -lX11
+LIBFLAGS = -L ./libft -lft -lmlx -framework OpenGL -framework AppKit
 
 LIST =	main \
 		line \
@@ -48,6 +46,3 @@ fclean: clean
 
 re: fclean all
 
-linux:
-	@make -C libft
-	@gcc $(FLAGS) $(LIBFLAGS_LINUX) $(OBJ) -o $(NAME) $(HEADER_LINUX)
