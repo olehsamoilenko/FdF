@@ -6,8 +6,8 @@ hence the name of the project) representation of a relief landscape linking vari
 a parameter to your program. Examples you can find in the folder ```maps```.
 Use my maps or create your own.
 Each number corresponds to a point in space:
-* The horizontal position corresponds to its axis.
-* The vertical position corresponds to its ordinate.
+* The horizontal position corresponds to its axis
+* The vertical position corresponds to its ordinate
 * The value corresponds to its altitude
 
 Interesting features:
@@ -25,7 +25,7 @@ Run the project:
 make
 ./fdf maps/example.fdf
 ```
-Works only on **Mac**.
+:green_apple: Works only on **Mac OS**
 
 The project preview you can watch on my [Instagram](https://www.instagram.com/p/Bl_LoxZAw2B/).
 Don't worry to like and subscribe.
