@@ -1,5 +1,8 @@
 FdF
 =====
+
+![Picture](https://github.com/olehsamoilenko/screenshots/blob/master/FdF/julia.png)
+
 This project is about creating a simplified graphic “wireframe” (“**fils de fer**” in french,
 hence the name of the project) representation of a relief landscape linking various points
 (x, y, z) via segments. The coordinates of this landscape are stored in a file passed as
@@ -27,5 +30,7 @@ make
 ```
 :green_apple: Works only on **Mac OS**
 
-The project preview you can watch on my [Instagram](https://www.instagram.com/p/Bl_LoxZAw2B/).
+You can watch the project preview on my [Instagram](https://www.instagram.com/p/Bl_LoxZAw2B/).
 Don't worry to like and subscribe.
+
+![Picture](https://github.com/olehsamoilenko/screenshots/blob/master/FdF/t1.png)
