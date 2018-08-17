@@ -1,6 +1,9 @@
 FdF
 =====
 
+You can watch the project preview on my [Instagram](https://www.instagram.com/p/Bl_LoxZAw2B/).
+Don't worry to like and subscribe.
+
 ![Picture](https://github.com/olehsamoilenko/screenshots/blob/master/FdF/julia.png)
 
 This project is about creating a simplified graphic “wireframe” (“**fils de fer**” in french,
@@ -29,8 +32,5 @@ make
 ./fdf maps/example.fdf
 ```
 :green_apple: Works only on **Mac OS**
-
-You can watch the project preview on my [Instagram](https://www.instagram.com/p/Bl_LoxZAw2B/).
-Don't worry to like and subscribe.
 
 ![Picture](https://github.com/olehsamoilenko/screenshots/blob/master/FdF/t1.png)
