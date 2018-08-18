@@ -28,6 +28,8 @@ Interesting features:
 Run the project:
 -----
 ```
+git clone --recursive https://github.com/olehsamoilenko/FdF.git
+cd FdF
 make
 ./fdf maps/example.fdf
 ```
