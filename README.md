@@ -4,7 +4,7 @@ FdF
 You can watch the project preview on my [Instagram](https://www.instagram.com/p/Bl_LoxZAw2B/).
 Don't worry to like and subscribe.
 
-![Picture](https://github.com/olehsamoilenko/screenshots/blob/master/FdF/julia.png)
+![Picture](https://github.com/olehsamoilenko/resources/blob/master/FdF/julia.png)
 
 This project is about creating a simplified graphic “wireframe” (“**fils de fer**” in french,
 hence the name of the project) representation of a relief landscape linking various points
@@ -35,4 +35,4 @@ make
 ```
 :green_apple: Works only on **Mac OS**
 
-![Picture](https://github.com/olehsamoilenko/screenshots/blob/master/FdF/t1.png)
+![Picture](https://github.com/olehsamoilenko/resources/blob/master/FdF/t1.png)
