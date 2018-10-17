@@ -8,7 +8,8 @@ Don't worry to like and subscribe.
 
 This project is about creating a simplified graphic “wireframe” (“**fils de fer**” in french,
 hence the name of the project) representation of a relief landscape linking various points
-(x, y, z) via segments. The coordinates of this landscape are stored in a file passed as
+(x, y, z) via segments using [Bresenham's line algorithm](https://uk.wikipedia.org/wiki/Алгоритм_Брезенхейма).
+The coordinates of this landscape are stored in a file passed as
 a parameter to your program. Examples you can find in the folder ```maps```.
 Use my maps or create your own.
 Each number corresponds to a point in space:
@@ -18,7 +19,7 @@ Each number corresponds to a point in space:
 
 Interesting features:
 -----
-* Rotating
+* [Rotating](http://grafika.me/node/82)
 * Moving
 * Zooming
 * Relief changing
