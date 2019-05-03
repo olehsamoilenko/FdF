@@ -25,7 +25,7 @@ int			main(int args, char **argv)
 		error("usage: ./fdf [filename]");
 	view = init(argv[1]);
 	intro(&view);
-	mlx_hook(view.win_ptr, EVENT_KEYS, 0, &key_hook, &view);
+	mlx_hook(view.win_ptr, EVENT_KEY_PRESS, EVENT_KEY_RELEASE, &key_hook, &view);
 	mlx_hook(view.win_ptr, EVENT_CLOSE, 0, &exit_func, 0);
 	mlx_loop(view.mlx_ptr);
 	return (0);

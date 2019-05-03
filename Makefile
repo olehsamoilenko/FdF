@@ -10,31 +10,43 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
-HEADER = -I ./includes -I ./libft/includes
-FLAGS = -Wall -Werror -Wextra
-LIBFLAGS = -L ./libft -lft -lmlx -framework OpenGL -framework AppKit
+NAME =			fdf
+INC =			-I ./includes \
+				-I ./libft/includes \
+				-I ./minilibx
+FLAGS =			#-Wall -Werror -Wextra
+MAKEFLAGS +=	--no-print-directory
+LIBS =			-L ./libft -lft \
+				-L ./minilibx -lmlx
 
-LIST =	main \
-		line \
-		key_hook \
-		draw \
-		transformation \
-		init \
-		parse \
-		intro
+ifeq ($(shell uname), Linux)
+	LIBS += -lX11 -lXext -lm
+endif
+ifeq ($(shell uname), Darwin)
+	LIBS += -framework OpenGL -framework AppKit
+endif
+
+LIST =			main \
+				line \
+				key_hook \
+				draw \
+				transformation \
+				init \
+				parse \
+				intro
 
 SRC = $(addprefix src/, $(addsuffix .c, $(LIST)))
 OBJ = $(addprefix obj/, $(addsuffix .o, $(LIST)))
 
 obj/%.o: src/%.c
-	@gcc $(FLAGS) -c $< -o $@ $(HEADER)
+	@gcc $(FLAGS) -c $< -o $@ $(INC)
 
 all: $(NAME)
 
+
 $(NAME): $(OBJ)
 	@make -C libft
-	@gcc $(FLAGS) $(LIBFLAGS) $(OBJ) -o $(NAME) $(HEADER)
+	@gcc $(OBJ) -o $(NAME) $(LIBS) $(INC)
 
 clean:
 	@make -C libft clean

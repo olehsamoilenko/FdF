@@ -12,28 +12,59 @@
 
 #ifndef FDF_H
 # define FDF_H
-# define KEY_ESC 53
-# define KEY_UP 126
-# define KEY_DOWN 125
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_ONE 18
-# define KEY_TWO 19
-# define KEY_PLUS 24
-# define KEY_MINUS 27
-# define KEY_ARROW_UP 116
-# define KEY_ARROW_DOWN 121
-# define KEY_BACKSPACE 51
-# define KEY_H 4
+
+# ifdef __APPLE__
+#  define KEY_ESC 53
+#  define KEY_UP 126
+#  define KEY_DOWN 125
+#  define KEY_LEFT 123
+#  define KEY_RIGHT 124
+#  define KEY_W 13
+#  define KEY_A 0
+#  define KEY_S 1
+#  define KEY_D 2
+#  define KEY_ONE 18
+#  define KEY_TWO 19
+#  define KEY_PLUS 24
+#  define KEY_MINUS 27
+#  define KEY_ARROW_UP 116
+#  define KEY_ARROW_DOWN 121
+#  define KEY_BACKSPACE 51
+#  define KEY_H 4
+#  define EVENT_KEY_RELEASE 0
+#  define ALPHA_HEIGHT 22
+#  define ALPHA_WIDTH 10
+#  define HELP_MARGIN 320
+# endif
+
+# ifdef __linux__
+#  define KEY_ESC 65307
+#  define KEY_UP 65362
+#  define KEY_DOWN 65364
+#  define KEY_LEFT 65361
+#  define KEY_RIGHT 65363
+#  define KEY_W 119
+#  define KEY_A 97
+#  define KEY_S 115
+#  define KEY_D 100
+#  define KEY_ONE 49
+#  define KEY_TWO 50
+#  define KEY_PLUS 61
+#  define KEY_MINUS 45
+#  define KEY_ARROW_UP 65434
+#  define KEY_ARROW_DOWN 65435
+#  define KEY_BACKSPACE 65288
+#  define KEY_H 104
+#  define EVENT_KEY_RELEASE 3
+#  define ALPHA_HEIGHT 9
+#  define ALPHA_WIDTH 6
+#  define HELP_MARGIN 220
+# endif
+
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1280
-# define ALPHA_HEIGHT 22
-# define ALPHA_WIDTH 10
-# define EVENT_KEYS 2
+# define LABEL_SIZE 70
+# define EVENT_KEY_PRESS 2
 # define EVENT_CLOSE 17
 # include "libft.h"
 # include "mlx.h"

@@ -46,11 +46,11 @@ void		frame_labels(t_view *view)
 	s = "FdF";
 	mlx_string_put(view->mlx_ptr, view->win_ptr,
 		(WIN_WIDTH - ft_strlen(s) * ALPHA_WIDTH) / 2,
-		35 - ALPHA_HEIGHT / 2, rgb_to_color(255, 255, 255), s);
+		LABEL_SIZE / 2 + ALPHA_HEIGHT / 2, rgb_to_color(255, 255, 255), s);
 	s = "osamoile";
 	mlx_string_put(view->mlx_ptr, view->win_ptr,
 		(WIN_WIDTH - ft_strlen(s) * ALPHA_WIDTH) / 2,
-		WIN_HEIGHT - 35 - ALPHA_HEIGHT / 2, rgb_to_color(255, 255, 255), s);
+		WIN_HEIGHT - LABEL_SIZE / 2 + ALPHA_HEIGHT / 2, rgb_to_color(255, 255, 255), s);
 }
 
 void		frame(t_view *view)
@@ -59,7 +59,7 @@ void		frame(t_view *view)
 	int		j;
 
 	i = -1;
-	while (++i < 70)
+	while (++i < LABEL_SIZE)
 	{
 		j = -1;
 		while (++j < WIN_WIDTH)
@@ -84,15 +84,15 @@ void		help(t_view *view)
 		rgb_to_color(255, 255, 255), "MOVE     : W A S D");
 	mlx_string_put(view->mlx_ptr, view->win_ptr, 50, 140,
 		rgb_to_color(255, 255, 255), "RELIEF   : PAGE UP / DOWN");
-	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - 320, 100,
+	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - HELP_MARGIN, 100,
 		rgb_to_color(255, 255, 255), "ROTATE X : ARROW UP / DOWN");
-	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - 320, 120,
+	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - HELP_MARGIN, 120,
 		rgb_to_color(255, 255, 255), "ROTATE Y : ARROW LEFT / RIGHT");
-	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - 320, 140,
+	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - HELP_MARGIN, 140,
 		rgb_to_color(255, 255, 255), "ROTATE Z : 1 2");
-	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - 320, 580,
+	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - HELP_MARGIN, 580,
 		rgb_to_color(255, 255, 255), "RESET    : BACKSPACE");
-	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - 320, 600,
+	mlx_string_put(view->mlx_ptr, view->win_ptr, WIN_WIDTH - HELP_MARGIN, 600,
 		rgb_to_color(255, 255, 255), "EXIT     : ESC");
 	mlx_string_put(view->mlx_ptr, view->win_ptr, 50, 600,
 		rgb_to_color(255, 255, 255), "HELP     : H");
